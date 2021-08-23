@@ -1,36 +1,51 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faHome,
+  faShoppingCart,
+  faHeart,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function BottomBar() {
+  const navButton = [
+    {
+      id: 1,
+      name: 'Home',
+      icon: faHome,
+    },
+    {
+      id: 2,
+      name: 'Cart',
+      icon: faShoppingCart,
+    },
+    {
+      id: 3,
+      name: 'Liked',
+      icon: faHeart,
+    },
+    {
+      id: 4,
+      name: 'Profil',
+      icon: faUser,
+    },
+  ];
   return (
     <nav className="footerbar">
-      <label htmlFor="home">
-        <input type="radio" name="group" id="home" className="nav-input" />
-        <span className="nav-button">
-          <i className="nav-icon fa fa-home"></i>
-          <span className="nav-text">Home</span>
-        </span>
-      </label>
-      <label htmlFor="cart">
-        <input type="radio" name="group" id="cart" className="nav-input" />
-        <span className="nav-button">
-          <i className="nav-icon fa fa-shopping-cart"></i>
-          <span className="nav-text">Cart</span>
-        </span>
-      </label>
-      <label htmlFor="love">
-        <input type="radio" name="group" id="love" className="nav-input" />
-        <span className="nav-button">
-          <i className="nav-icon fa fa-heart"></i>
-          <span className="nav-text">Loves</span>
-        </span>
-      </label>
-      <label htmlFor="profil">
-        <input type="radio" name="group" id="profil" className="nav-input" />
-        <span className="nav-button">
-          <i className="nav-icon fa fa-user"></i>
-          <span className="nav-text">Profil</span>
-        </span>
-      </label>
+      {navButton.map((nav) => (
+        <label htmlFor={nav.name}>
+          <input
+            type="radio"
+            name="group"
+            id={nav.name}
+            className="nav-input"
+          />
+          <span className="nav-button">
+            <FontAwesomeIcon icon={nav.icon} className="nav-icon" />
+            <span className="nav-text">{nav.name}</span>
+          </span>
+        </label>
+      ))}
     </nav>
   );
 }
