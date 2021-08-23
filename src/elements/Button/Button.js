@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 
 export default function Button(props) {
-  const className = ['btn', props.className];
+  const className = [props.className];
 
   if (props.isLarge) className.push('btn-lg');
   if (props.isSmall) className.push('btn-sm');

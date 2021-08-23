@@ -11,7 +11,7 @@ export default function BrandLogo({ color, size }) {
     <div className={`brand_logo ${classes.join(' ')}`}>
       <figure className={`brand_image ${classes.join(' ')}`}>
         <img
-          src={classes === 'white' ? LogoWhite : LogoRed}
+          src={color === 'white' ? LogoWhite : LogoRed}
           alt="logo rosid warna putih"
           className="img-cover"
         />

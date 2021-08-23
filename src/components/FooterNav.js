@@ -33,7 +33,7 @@ export default function BottomBar() {
   return (
     <nav className="footerbar">
       {navButton.map((nav) => (
-        <label htmlFor={nav.name}>
+        <label htmlFor={nav.name} key={nav.id}>
           <input
             type="radio"
             name="group"

@@ -1,0 +1,126 @@
+@import 'variables';
+@import 'colorVariables';
+
+@each $length in $lengths {
+  /* Margin */
+  .mt-#{$length} {
+    margin-top: #{$length + 'px'};
+  }
+  .ml-#{$length} {
+    margin-left: #{$length + 'px'};
+  }
+  .mr-#{$length} {
+    margin-right: #{$length + 'px'};
+  }
+  .mb-#{$length} {
+    margin-bottom: #{$length + 'px'};
+  }
+  .my-#{$length} {
+    margin-top: #{$length + 'px'};
+    margin-bottom: #{$length + 'px'};
+  }
+  .mx-#{$length} {
+    margin-left: #{$length + 'px'};
+    margin-right: #{$length + 'px'};
+  }
+
+  /* Padding */
+  .pt-#{$length} {
+    padding-top: #{$length + 'px'};
+  }
+  .pl-#{$length} {
+    padding-left: #{$length + 'px'};
+  }
+  .pr-#{$length} {
+    padding-right: #{$length + 'px'};
+  }
+  .pb-#{$length} {
+    padding-bottom: #{$length + 'px'};
+  }
+  .py-#{$length} {
+    padding-top: #{$length + 'px'};
+    padding-bottom: #{$length + 'px'};
+  }
+  .px-#{$length} {
+    padding-left: #{$length + 'px'};
+    padding-right: #{$length + 'px'};
+  }
+}
+
+@each $display in $displays {
+  .d-#{$display} {
+    display: #{$display} !important;
+  }
+}
+
+.display-1 {
+  font-size: 2.75rem;
+  font-weight: 600;
+}
+.display-2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+.display-3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.display-4 {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.display-5 {
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.img-contain {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.btn {
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  display: inline-block;
+}
+
+.btn-lg {
+  padding: 0.75rem 1rem;
+  font-size: 0.925rem;
+}
+
+.btn-sm {
+  padding: 0.45rem 0.65rem;
+  font-size: 0.75rem;
+}
+
+.btn-shadow {
+  box-shadow: 0 4px 10px 10px rgba(0, 0, 0, 0.25);
+}
+
+.btn-danger {
+  background-color: $red;
+  color: white;
+}
+
+.btn-primary {
+  background-color: $primaryColor;
+  color: white;
+}
+
+.visible {
+  display: unset;
+}
+
+.not-visible {
+  display: none;
+}
