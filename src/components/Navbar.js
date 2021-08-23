@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BrandLogo from 'elements/Brand/BrandLogo';
 import Button from 'elements/Button/Button';
+import { Redirect, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHome,
@@ -9,32 +10,43 @@ import {
   faUser,
   faBell,
   faBars,
+  faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
+const navButton = [
+  {
+    id: 1,
+    name: 'Home',
+    icon: faHome,
+  },
+  {
+    id: 2,
+    name: 'Cart',
+    icon: faShoppingCart,
+  },
+  {
+    id: 3,
+    name: 'Liked',
+    icon: faHeart,
+  },
+  {
+    id: 4,
+    name: 'Profil',
+    icon: faUser,
+  },
+];
 export default function Navbar() {
   const [drawer, setDrawer] = useState(false);
-  const navButton = [
-    {
-      id: 1,
-      name: 'Home',
-      icon: faHome,
-    },
-    {
-      id: 2,
-      name: 'Cart',
-      icon: faShoppingCart,
-    },
-    {
-      id: 3,
-      name: 'Liked',
-      icon: faHeart,
-    },
-    {
-      id: 4,
-      name: 'Profil',
-      icon: faUser,
-    },
-  ];
+  const [back, setBack] = useState(false);
+  const location = useLocation();
+  const referer = location.state && location.state.referer;
+  useEffect(() => {
+    location.pathname !== '/home' ? setBack(true) : setBack(false);
+  }, [location]);
+
+  const handlePreviousPage = () => {
+    return <Redirect to={referer} />;
+  };
 
   const handleDrawer = () => {
     setDrawer(!drawer);
@@ -45,8 +57,19 @@ export default function Navbar() {
         <Button type="link" href="/" className="brand">
           <BrandLogo color="white" size="small" />
         </Button>
-        <Button className="navbar-toggler" onClick={() => handleDrawer()}>
+        <Button
+          className={`navbar-toggler ${!back ? 'visible' : 'not-visible'}`}
+          onClick={() => handleDrawer()}
+        >
           <FontAwesomeIcon icon={faBars} />
+        </Button>
+        <Button
+          className={`navbar-toggler ${back ? 'visible' : 'not-visible'}`}
+        >
+          <FontAwesomeIcon
+            icon={faChevronLeft}
+            onClick={() => handlePreviousPage()}
+          />
         </Button>
       </div>
 
