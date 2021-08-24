@@ -219,6 +219,15 @@ body {
   border-top: 1px solid rgba($primaryColor, 0.1);
   z-index: 3;
 
+  &.footerbar-detail-product {
+    height: 175px;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 32px;
+    gap: 1rem;
+  }
+
   @media (min-width: 768px) {
     display: none;
   }
@@ -268,6 +277,13 @@ body {
   .nav-input:checked ~ .nav-button .nav-icon {
     transform: translateY(-9px);
   }
+}
+
+.sub-total {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 section {
@@ -462,6 +478,7 @@ section {
 
   &.card_product {
     min-height: 230px;
+    box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.25);
 
     .meta-wrapper {
       margin-top: 10px;
@@ -662,6 +679,36 @@ section {
     border-radius: 10px;
     svg {
       margin-right: 8px;
+    }
+  }
+}
+
+.product_cart {
+  margin-bottom: 190px;
+  padding: 0 32px;
+
+  .row {
+    height: 100px;
+  }
+
+  .image-wrapper {
+    height: 100px;
+    border-radius: 15px;
+    box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  .cart-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+
+    .counter {
+      height: 30px;
+    }
+
+    &:last-child {
+      align-items: flex-end;
     }
   }
 }

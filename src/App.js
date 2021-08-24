@@ -3,6 +3,7 @@ import LoginPage from 'pages/LoginPage';
 
 import HomePage from 'pages/HomePage';
 import DetailProductPage from 'pages/DetailProductPage';
+import ShoppingCartPage from 'pages/ShoppingCartPage';
 function App() {
   return (
     <Router>
@@ -14,6 +15,9 @@ function App() {
       </Route>
       <Route path="/product">
         <DetailProductPage />
+      </Route>
+      <Route path="/shopping-cart">
+        <ShoppingCartPage />
       </Route>
     </Router>
   );

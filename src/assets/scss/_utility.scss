@@ -1,6 +1,13 @@
 @import 'variables';
 @import 'colorVariables';
 
+.color-primary {
+  color: $primaryColor;
+}
+.color-shadow-text {
+  color: $shadowColorText;
+}
+
 @each $length in $lengths {
   /* Margin */
   .mt-#{$length} {
@@ -51,6 +58,9 @@
   .d-#{$display} {
     display: #{$display} !important;
   }
+}
+.d-block {
+  width: 100%;
 }
 
 .display-1 {
@@ -104,7 +114,7 @@
 }
 
 .btn-shadow {
-  box-shadow: 0 4px 10px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 6px 0px rgba(0, 0, 0, 0.25);
 }
 
 .btn-danger {
