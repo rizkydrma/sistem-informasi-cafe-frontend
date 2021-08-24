@@ -712,3 +712,31 @@ section {
     }
   }
 }
+
+.info-order {
+  margin-top: 75px;
+
+  padding: 50px 32px;
+}
+
+.ordering {
+  text-align: center;
+}
+
+.order-list-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 10px;
+
+  .image-wrapper {
+    height: 44px;
+    border-radius: 10px;
+  }
+}
+
+.footerbar-order-info {
+  padding: 0 32px;
+  justify-content: space-between;
+}
