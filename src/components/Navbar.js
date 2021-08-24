@@ -8,7 +8,6 @@ import {
   faShoppingCart,
   faHeart,
   faUser,
-  faBell,
   faBars,
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
@@ -35,7 +34,7 @@ const navButton = [
     icon: faUser,
   },
 ];
-export default function Navbar() {
+export default function Navbar(props) {
   const [drawer, setDrawer] = useState(false);
   const [back, setBack] = useState(false);
   const location = useLocation();
@@ -83,9 +82,12 @@ export default function Navbar() {
           </li>
         ))}
       </ul>
+
+      <h5 className="display-4 title_page">{props.title}</h5>
+
       <div className="notification">
         <Button type="link" href="#">
-          <FontAwesomeIcon className="nav-icon" icon={faBell} />
+          <FontAwesomeIcon className="nav-icon" icon={faShoppingCart} />
         </Button>
       </div>
     </nav>

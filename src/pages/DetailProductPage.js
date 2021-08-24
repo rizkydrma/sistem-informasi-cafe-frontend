@@ -1,25 +1,30 @@
 import React, { useState } from 'react';
 import Navbar from 'components/Navbar';
-import FooterNav from 'components/FooterNav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faCoffee } from '@fortawesome/free-solid-svg-icons';
+import {
+  faStar,
+  faCoffee,
+  faShoppingCart,
+} from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
 
 import ImageCoffee from 'assets/images/coffe.jpg';
-import Button from 'elements/Button/Button';
+import Counter from 'elements/Counter/Counter';
 
 export default function DetailProductPage() {
   const [fullDescription, setFullDescription] = useState(false);
+  const titlePage = 'Detail Product';
   const handleFullDescription = () => {
     setFullDescription(!fullDescription);
   };
   const string =
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero unde temporibus ad impedit, laboriosam odit illum accusantium autem facilis vero ut ex obcaecati repudiandae omnis, dolor dolores velit at? Dolor.';
   const readMoreText = (words, start, end) => {
-    return words.split(' ').slice(start, end).join(' ') + '...' + '  ';
+    return words.split(' ').slice(start, end).join(' ') + `...  `;
   };
   return (
     <>
-      <Navbar />
+      <Navbar title={titlePage} />
       <section className="main_detail_page">
         <div className="container">
           <div className="row">
@@ -100,13 +105,29 @@ export default function DetailProductPage() {
                 <div className="container">
                   <div className="row pt-0">
                     <div className="col-xs-7 col-sm-4 d-flex">
-                      <h3 className="display-2">Rp.</h3>
-                      <span className="display-2">18K</span>
+                      <h3 className="display-3">Rp.</h3>
+                      <span className="display-3">18K</span>
                     </div>
                     <div className="col-xs-5 col-sm-4">
-                      <Button isLarge className="add_cart d-block">
-                        Add To Cart
-                      </Button>
+                      <Counter number="1" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="footerbar footerbar-product">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-xs-4">
+                      <span className="nav-button">
+                        <FontAwesomeIcon icon={faHeart} />
+                      </span>
+                    </div>
+                    <div className="col-xs-8">
+                      <div className="add_cart">
+                        <FontAwesomeIcon icon={faShoppingCart} />
+                        Add to Cart
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -115,7 +136,6 @@ export default function DetailProductPage() {
           </div>
         </div>
       </section>
-      <FooterNav />
     </>
   );
 }

@@ -11,6 +11,7 @@ import ImageCoffee from 'assets/images/coffe.jpg';
 
 export default function HomePage() {
   const [products, setProducts] = useState(false);
+  const titlePage = 'Search Product';
 
   useEffect(() => {
     setTimeout(() => {
@@ -20,7 +21,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Navbar />
+      <Navbar title={titlePage} />
       <section className="home_page">
         <div className="main_home_page top_bar">
           <h1 className="slogan display-2 mb-10">Find the best for you</h1>

@@ -2,9 +2,9 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHome,
-  faShoppingCart,
   faHeart,
   faUser,
+  faBell,
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function BottomBar() {
@@ -16,13 +16,13 @@ export default function BottomBar() {
     },
     {
       id: 2,
-      name: 'Cart',
-      icon: faShoppingCart,
+      name: 'Liked',
+      icon: faHeart,
     },
     {
       id: 3,
-      name: 'Liked',
-      icon: faHeart,
+      name: 'Notification',
+      icon: faBell,
     },
     {
       id: 4,

@@ -1,0 +1,19 @@
+@import '../../assets/scss/colorVariables';
+
+.counter {
+  min-width: 100px;
+  width: 100%;
+  border: 1px solid $primaryColor;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0.25rem 0.45rem;
+
+  button {
+    border: none;
+    background-color: transparent;
+    color: $shadowColorText;
+  }
+}
