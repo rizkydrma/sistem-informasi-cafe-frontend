@@ -587,6 +587,10 @@ section {
   .image-wrapper {
     min-height: 340px;
     height: 350px;
+
+    @media (min-width: 768px) {
+      height: 70vh;
+    }
   }
 
   .meta-wrapper {
@@ -652,17 +656,39 @@ section {
 }
 
 .type-product {
+  @media (min-width: 768px) {
+    margin-top: 20px;
+  }
   .row {
     padding: 0;
   }
   .card-type {
+    cursor: pointer;
     padding: 8px;
     text-align: center;
     border: 1px solid $primaryColor;
+
+    &.active {
+      background-color: $primaryColor;
+      color: $textColor;
+    }
+  }
+}
+
+.price-product {
+  @media (min-width: 768px) {
+    margin-top: 20px;
   }
 }
 
 .footerbar-product {
+  &.footerbar-product-desk {
+    display: none;
+
+    @media (min-width: 768px) {
+      display: unset;
+    }
+  }
   padding: 0 32px;
   .nav-button {
     font-size: 1.5rem;

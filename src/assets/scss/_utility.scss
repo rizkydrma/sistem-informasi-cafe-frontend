@@ -8,6 +8,12 @@
   color: $shadowColorText;
 }
 
+@each $align in $aligns {
+  .text-#{$align} {
+    text-align: #{$align};
+  }
+}
+
 @each $length in $lengths {
   /* Margin */
   .mt-#{$length} {
@@ -77,22 +83,39 @@
 .display-1 {
   font-size: 2.75rem;
   font-weight: 600;
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
 }
 .display-2 {
   font-size: 2rem;
   font-weight: 600;
+  @media (min-width: 768px) {
+    font-size: 2.25rem;
+  }
 }
 .display-3 {
   font-size: 1.5rem;
   font-weight: 500;
+  @media (min-width: 768px) {
+    font-size: 1.75rem;
+  }
 }
 .display-4 {
   font-size: 1rem;
   font-weight: 400;
+  @media (min-width: 768px) {
+    font-size: 1.25rem;
+  }
 }
 .display-5 {
   font-size: 0.85rem;
   font-weight: 400;
+
+  @media (min-width: 768px) {
+    font-size: 0.925rem;
+  }
 }
 
 .img-cover {
