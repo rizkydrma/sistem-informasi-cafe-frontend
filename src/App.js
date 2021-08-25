@@ -4,6 +4,7 @@ import LoginPage from 'pages/LoginPage';
 import HomePage from 'pages/HomePage';
 import DetailProductPage from 'pages/DetailProductPage';
 import ShoppingCartPage from 'pages/ShoppingCartPage';
+import OrderInfoPage from 'pages/OrderInfoPage';
 function App() {
   return (
     <Router>
@@ -18,6 +19,9 @@ function App() {
       </Route>
       <Route path="/shopping-cart">
         <ShoppingCartPage />
+      </Route>
+      <Route path="/order-info">
+        <OrderInfoPage />
       </Route>
     </Router>
   );

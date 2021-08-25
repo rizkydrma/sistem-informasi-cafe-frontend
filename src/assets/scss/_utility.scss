@@ -52,6 +52,11 @@
     padding-left: #{$length + 'px'};
     padding-right: #{$length + 'px'};
   }
+
+  /* Width */
+  .w-#{$length} {
+    width: #{$length + '%'};
+  }
 }
 
 @each $display in $displays {
@@ -61,6 +66,12 @@
 }
 .d-block {
   width: 100%;
+}
+
+@for $i from 1 through 10 {
+  .flex-grow-#{$i} {
+    flex-grow: $i;
+  }
 }
 
 .display-1 {
@@ -133,4 +144,8 @@
 
 .not-visible {
   display: none;
+}
+
+.content-space-between {
+  justify-content: space-between;
 }
