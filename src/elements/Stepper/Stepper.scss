@@ -1,0 +1,85 @@
+@import '../../assets/scss/colorVariables';
+
+.progressbar li {
+  list-style: none;
+  float: left;
+  width: calc(100% / 4);
+  position: relative;
+  text-align: center;
+}
+
+.progressbar li::before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  display: block;
+  // border: 1px solid #333;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: $shadowColorText;
+}
+
+.progressbar li::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: $shadowColorText;
+  top: 8px;
+  left: -50%;
+  z-index: -1;
+}
+
+.progressbar li:first-child::after {
+  content: none;
+}
+
+.progressbar li.active {
+  color: $primaryColor;
+}
+
+.progressbar li.active::before {
+  box-shadow: 0 0 10px 5px $primaryColor;
+  background-color: $primaryColor !important;
+}
+
+.progressbar li.active + li::after {
+  background-color: $primaryColor;
+}
+
+.progressbar li span {
+  visibility: hidden;
+}
+
+.progressbar li.current-step span {
+  visibility: visible;
+}
+
+.inner-circle {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.inner-circle::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  line-height: 10px;
+  border-radius: 50%;
+  background-color: $textColor;
+  transform: translateY(-23px);
+  box-shadow: 0 0 3px 1px rgba($textColor, 0.25);
+  visibility: hidden;
+}
+
+.current-step .inner-circle::before {
+  visibility: visible;
+}
+
+.current-progress {
+  text-align: center;
+  color: $textColor;
+}
