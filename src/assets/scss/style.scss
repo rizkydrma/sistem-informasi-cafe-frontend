@@ -830,6 +830,29 @@ table.order-list {
     border-radius: 5px;
   }
 
+  &.order-list-invoice {
+    thead tr {
+      background-color: $primaryColor;
+      color: white;
+      line-height: 30px;
+
+      th {
+        padding: 8px 0 8px 16px;
+      }
+    }
+    tr:nth-child(even) {
+      background-color: $secondaryColor;
+    }
+
+    tbody tr td:first-child {
+      width: max-content;
+    }
+
+    tr td {
+      padding: 8px 0 8px 16px;
+    }
+  }
+
   @media (min-width: 768px) {
     tbody tr td:first-child {
       width: 10%;
@@ -851,5 +874,46 @@ table.order-list {
     @media (min-width: 768px) {
       display: flex;
     }
+  }
+}
+
+.invoice-page {
+  margin-top: 100px;
+  padding: 0 32px;
+  margin-bottom: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  .rectangle-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    border-radius: 0 0 15px 15px;
+    border-bottom: 2px solid rgba($primaryColor, 0.3);
+  }
+
+  @media (min-width: 768px) {
+    padding: 0 10rem;
+    gap: 2rem;
+    flex-direction: row-reverse;
+    .rectangle-inner {
+      display: none;
+    }
+    .invoice-page-item:first-child {
+      flex-grow: 4;
+    }
+
+    .invoice-page-item {
+      flex-grow: 8;
+    }
+  }
+}
+
+.top-style-1 {
+  h5 {
+    letter-spacing: 1px;
   }
 }

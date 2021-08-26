@@ -5,6 +5,7 @@ import HomePage from 'pages/HomePage';
 import DetailProductPage from 'pages/DetailProductPage';
 import ShoppingCartPage from 'pages/ShoppingCartPage';
 import OrderInfoPage from 'pages/OrderInfoPage';
+import InvoicePage from 'pages/InvoicePage';
 function App() {
   return (
     <Router>
@@ -22,6 +23,9 @@ function App() {
       </Route>
       <Route path="/order-info">
         <OrderInfoPage />
+      </Route>
+      <Route path="/invoice">
+        <InvoicePage />
       </Route>
     </Router>
   );
