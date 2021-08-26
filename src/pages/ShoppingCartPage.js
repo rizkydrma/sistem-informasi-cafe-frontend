@@ -12,101 +12,192 @@ export default function ShoppingCartPage() {
   return (
     <>
       <Navbar title={titlePage} />
-      <div className="product_cart">
-        <div className="container mt-60">
-          <div className="row ">
-            <div className="col-xs-4 cart-item">
-              <figure className="image-wrapper">
-                <img src={ImageCoffee} alt="kopi" className="img-cover" />
-              </figure>
+      <div className="info-order shopping-cart-page">
+        <div className="info-order-item">
+          <div className="footerbar-detail-product footerbar-detail-product-desk">
+            <div className="sub-total">
+              <h5 className="display-5">Subtotal</h5>
+              <h3 className="display-4">Rp. 101K</h3>
             </div>
-            <div className="col-xs-4 cart-item">
-              <h4 className="display-4 mb-10">Cappucino</h4>
-              <span className="display-5 mb-10 color-shadow-text">
-                Signature
-              </span>
-              <h5 className="display-4 mt-10 color-primary">Rp.18K</h5>
+            <div className="sub-total">
+              <h5 className="display-5">Tax (10%)</h5>
+              <h3 className="display-4">Rp. 10.1K</h3>
             </div>
-            <div className="col-xs-4 cart-item">
-              <FontAwesomeIcon icon={faTimes} className="icon-close" />
-              <Counter number="1" />
+            <div className="sub-total">
+              <h5 className="display-5">Grand Total</h5>
+              <h3 className="display-4">Rp. 111.1K</h3>
             </div>
-          </div>
-          <div className="row ">
-            <div className="col-xs-4 cart-item">
-              <figure className="image-wrapper">
-                <img src={ImageCoffee} alt="kopi" className="img-cover" />
-              </figure>
-            </div>
-            <div className="col-xs-4 cart-item">
-              <h4 className="display-4 mb-10">Cappucino</h4>
-              <span className="display-5 mb-10 color-shadow-text">
-                Signature
-              </span>
-              <h5 className="display-4 mt-10 color-primary">Rp.18K</h5>
-            </div>
-            <div className="col-xs-4 cart-item">
-              <FontAwesomeIcon icon={faTimes} className="icon-close" />
-              <Counter number="1" />
-            </div>
-          </div>
-          <div className="row ">
-            <div className="col-xs-4 cart-item">
-              <figure className="image-wrapper">
-                <img src={ImageCoffee} alt="kopi" className="img-cover" />
-              </figure>
-            </div>
-            <div className="col-xs-4 cart-item">
-              <h4 className="display-4 mb-10">Cappucino</h4>
-              <span className="display-5 mb-10 color-shadow-text">
-                Signature
-              </span>
-              <h5 className="display-4 mt-10 color-primary">Rp.18K</h5>
-            </div>
-            <div className="col-xs-4 cart-item">
-              <FontAwesomeIcon icon={faTimes} className="icon-close" />
-              <Counter number="1" />
-            </div>
-          </div>
-          <div className="row ">
-            <div className="col-xs-4 cart-item">
-              <figure className="image-wrapper">
-                <img src={ImageCoffee} alt="kopi" className="img-cover" />
-              </figure>
-            </div>
-            <div className="col-xs-4 cart-item">
-              <h4 className="display-4 mb-10">Cappucino</h4>
-              <span className="display-5 mb-10 color-shadow-text">
-                Signature
-              </span>
-              <h5 className="display-4 mt-10 color-primary">Rp.18K</h5>
-            </div>
-            <div className="col-xs-4 cart-item">
-              <FontAwesomeIcon icon={faTimes} className="icon-close" />
-              <Counter number="1" />
-            </div>
-          </div>
-          <div className="row ">
-            <div className="col-xs-4 cart-item">
-              <figure className="image-wrapper">
-                <img src={ImageCoffee} alt="kopi" className="img-cover" />
-              </figure>
-            </div>
-            <div className="col-xs-4 cart-item">
-              <h4 className="display-4 mb-10">Cappucino</h4>
-              <span className="display-5 mb-10 color-shadow-text">
-                Signature
-              </span>
-              <h5 className="display-4 mt-10 color-primary">Rp.18K</h5>
-            </div>
-            <div className="col-xs-4 cart-item">
-              <FontAwesomeIcon icon={faTimes} className="icon-close" />
-              <Counter number="1" />
-            </div>
+            <Button
+              isLarge
+              type="link"
+              href="#"
+              hasShadow
+              className="btn btn-primary d-block"
+            >
+              Procced To Order
+            </Button>
           </div>
         </div>
+        <div className="info-order-item info-order-item-cart">
+          <table className="shopping-cart">
+            <tbody>
+              <tr>
+                <td>
+                  <figure className="image-wrapper">
+                    <img src={ImageCoffee} alt="kopi" className="img-cover" />
+                  </figure>
+                </td>
+                <td>
+                  <h4 className="display-4">Cappucino</h4>
+                  <span className="display-5 color-shadow-text">Signature</span>
+                  <h5 className="display-4 mt-10 color-primary">Rp.18K</h5>
+                </td>
+                <td>
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    className="icon-close mb-20"
+                  />
+                  <Counter number="1" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <figure className="image-wrapper">
+                    <img src={ImageCoffee} alt="kopi" className="img-cover" />
+                  </figure>
+                </td>
+                <td>
+                  <h4 className="display-4">Cappucino</h4>
+                  <span className="display-5 color-shadow-text">Signature</span>
+                  <h5 className="display-4 mt-10 color-primary">Rp.18K</h5>
+                </td>
+                <td>
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    className="icon-close mb-20"
+                  />
+                  <Counter number="1" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <figure className="image-wrapper">
+                    <img src={ImageCoffee} alt="kopi" className="img-cover" />
+                  </figure>
+                </td>
+                <td>
+                  <h4 className="display-4">Cappucino</h4>
+                  <span className="display-5 color-shadow-text">Signature</span>
+                  <h5 className="display-4 mt-10 color-primary">Rp.18K</h5>
+                </td>
+                <td>
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    className="icon-close mb-20"
+                  />
+                  <Counter number="1" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <figure className="image-wrapper">
+                    <img src={ImageCoffee} alt="kopi" className="img-cover" />
+                  </figure>
+                </td>
+                <td>
+                  <h4 className="display-4">Cappucino</h4>
+                  <span className="display-5 color-shadow-text">Signature</span>
+                  <h5 className="display-4 mt-10 color-primary">Rp.18K</h5>
+                </td>
+                <td>
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    className="icon-close mb-20"
+                  />
+                  <Counter number="1" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <figure className="image-wrapper">
+                    <img src={ImageCoffee} alt="kopi" className="img-cover" />
+                  </figure>
+                </td>
+                <td>
+                  <h4 className="display-4">Cappucino</h4>
+                  <span className="display-5 color-shadow-text">Signature</span>
+                  <h5 className="display-4 mt-10 color-primary">Rp.18K</h5>
+                </td>
+                <td>
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    className="icon-close mb-20"
+                  />
+                  <Counter number="1" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <figure className="image-wrapper">
+                    <img src={ImageCoffee} alt="kopi" className="img-cover" />
+                  </figure>
+                </td>
+                <td>
+                  <h4 className="display-4">Cappucino</h4>
+                  <span className="display-5 color-shadow-text">Signature</span>
+                  <h5 className="display-4 mt-10 color-primary">Rp.18K</h5>
+                </td>
+                <td>
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    className="icon-close mb-20"
+                  />
+                  <Counter number="1" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <figure className="image-wrapper">
+                    <img src={ImageCoffee} alt="kopi" className="img-cover" />
+                  </figure>
+                </td>
+                <td>
+                  <h4 className="display-4">Cappucino</h4>
+                  <span className="display-5 color-shadow-text">Signature</span>
+                  <h5 className="display-4 mt-10 color-primary">Rp.18K</h5>
+                </td>
+                <td>
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    className="icon-close mb-20"
+                  />
+                  <Counter number="1" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <figure className="image-wrapper">
+                    <img src={ImageCoffee} alt="kopi" className="img-cover" />
+                  </figure>
+                </td>
+                <td>
+                  <h4 className="display-4">Cappucino</h4>
+                  <span className="display-5 color-shadow-text">Signature</span>
+                  <h5 className="display-4 mt-10 color-primary">Rp.18K</h5>
+                </td>
+                <td>
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    className="icon-close mb-20"
+                  />
+                  <Counter number="1" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div className="footerbar footerbar-detail-product">
+      <div className="footerbar footerbar-detail-product ">
         <div className="sub-total">
           <h5 className="display-5">Subtotal</h5>
           <h3 className="display-4">Rp. 101K</h3>

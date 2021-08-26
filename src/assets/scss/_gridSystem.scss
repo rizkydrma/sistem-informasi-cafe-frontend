@@ -16,8 +16,9 @@
 }
 .row:after {
   content: '';
-  display: table;
+  display: table-cell;
   clear: both;
+  direction: ltr;
 }
 
 [class^='col-'] {

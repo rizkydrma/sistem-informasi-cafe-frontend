@@ -1,9 +1,8 @@
 import React from 'react';
 import Navbar from 'components/Navbar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTasks } from '@fortawesome/free-solid-svg-icons';
 
 import ImageCoffee from 'assets/images/coffe.jpg';
+import Stepper from 'elements/Stepper/Stepper';
 
 export default function OrderInfoPage() {
   const titlePage = 'Order Info';
@@ -12,75 +11,66 @@ export default function OrderInfoPage() {
     <>
       <Navbar title={titlePage} />
       <section className="info-order">
-        <div className="ordering">
-          <h5 className="display-5 mb-10 color-shadow-text">Nama Pemesan</h5>
-          <h3 className="display-3 mb-20">Rizky Darma</h3>
-          <h5 className="display-5 mb-10 color-shadow-text">No Table</h5>
-          <h3 className="display-3 mb-20">23</h3>
-          <h5 className="display-5">order is being prepared soon</h5>
+        <div className="info-order-item">
+          <div className="ordering">
+            <h5 className="display-5 mb-10 color-shadow-text">Nama Pemesan</h5>
+            <h3 className="display-3 mb-20">Rizky Darma</h3>
+            <h5 className="display-5 mb-10 color-shadow-text">No Table</h5>
+            <h3 className="display-3 mb-20">23</h3>
+            <h5 className="display-5 mb-20 color-shadow-text">
+              order is being prepared soon
+            </h5>
+          </div>
+          <Stepper />
+
+          <div className="footerbar-info-order footbar-info-order-desk mt-20">
+            <h3 className="display-5">Grand Total</h3>
+            <h2 className="display-4 color-primary">Rp. 111.1K</h2>
+          </div>
         </div>
-        <div className="d-flex content-space-between mt-50 mb-10">
-          <h4 className="display-4">Order List</h4>
-          <FontAwesomeIcon icon={faTasks} />
-        </div>
-        <div className="order-list">
-          <div className="order-list-row">
-            <div className="item flex-grow-1">
-              <figure className="image-wrapper">
-                <img src={ImageCoffee} alt="kopi" className="img-cover" />
-              </figure>
-            </div>
-            <div className="item flex-grow-10">
-              <div className="order-name">
-                <h4 className="display-4">Coffe</h4>
-                <h5 className="display-5 color-shadow-text">Signature</h5>
-              </div>
-            </div>
-            <div className="item flex-grow-1">
-              <div className="order-amount">
-                <h4 className="display-4">3x18K</h4>
-              </div>
-            </div>
-          </div>
-          <div className="order-list-row">
-            <div className="item flex-grow-1">
-              <figure className="image-wrapper">
-                <img src={ImageCoffee} alt="kopi" className="img-cover" />
-              </figure>
-            </div>
-            <div className="item flex-grow-10">
-              <div className="order-name">
-                <h4 className="display-4">Coffe</h4>
-                <h5 className="display-5 color-shadow-text">Signature</h5>
-              </div>
-            </div>
-            <div className="item flex-grow-1">
-              <div className="order-amount">
-                <h4 className="display-4">3x18K</h4>
-              </div>
-            </div>
-          </div>
-          <div className="order-list-row">
-            <div className="item flex-grow-1">
-              <figure className="image-wrapper">
-                <img src={ImageCoffee} alt="kopi" className="img-cover" />
-              </figure>
-            </div>
-            <div className="item flex-grow-10">
-              <div className="order-name">
-                <h4 className="display-4">Coffe</h4>
-                <h5 className="display-5 color-shadow-text">Signature</h5>
-              </div>
-            </div>
-            <div className="item flex-grow-1">
-              <div className="order-amount">
-                <h4 className="display-4">3x18K</h4>
-              </div>
-            </div>
-          </div>
+        <div className="info-order-item">
+          <table className="order-list">
+            <thead>
+              <tr>
+                <th colSpan="2">
+                  <span className="display-5">Order Item</span>
+                </th>
+                <th>
+                  <span className="display-5">qty</span>
+                </th>
+                <th>
+                  <span className="display-5">price</span>
+                </th>
+                <th>
+                  <span className="display-5">total</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <img src={ImageCoffee} alt="kopi" className="img-cover" />
+                </td>
+                <td>
+                  <span className="display-4">Coffe</span>
+                  <br />
+                  <span className="display-5 color-shadow-text">Signature</span>
+                </td>
+                <td>
+                  <span className="display-5">3</span>
+                </td>
+                <td>
+                  <span className="display-5">18K</span>
+                </td>
+                <td>
+                  <span className="display-5 color-primary">54K</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
-      <div className="footerbar footerbar-order-info">
+      <div className="footerbar footerbar-info-order">
         <h3 className="display-4">Grand Total</h3>
         <h2 className="display-3 color-primary">Rp. 111.1K</h2>
       </div>
