@@ -3,23 +3,22 @@ import SkeletonElement from './SkeletonElement';
 import './Skeleton.scss';
 import Shimmer from './Shimmer';
 
-export default function SkeletonOrderItem({ theme }) {
+export default function SkeletonFooter({ theme }) {
   const themeClasess = theme || 'light';
 
   return (
-    <div className={`skeleton-wrapper  ${themeClasess}`}>
-      <div className="skeleton-order-item">
-        <SkeletonElement type="avatar" />
-        <div className="d-flex flex-column w-80">
-          <SkeletonElement type="title" />
+    <div className={`skeleton-wrapper ${themeClasess} w-100`}>
+      <div className="skeleton-footer skeleton-order-item">
+        <div className="d-flex flex-column w-70">
           <SkeletonElement type="text" />
           <SkeletonElement type="text" />
         </div>
-        <div className="d-flex flex-column w-10">
+        <div className="d-flex flex-column w-30">
           <SkeletonElement type="text" />
           <SkeletonElement type="text" />
         </div>
       </div>
+      <SkeletonElement type="button" />
       <Shimmer />
     </div>
   );

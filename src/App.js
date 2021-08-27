@@ -6,6 +6,7 @@ import DetailProductPage from 'pages/DetailProductPage';
 import ShoppingCartPage from 'pages/ShoppingCartPage';
 import OrderInfoPage from 'pages/OrderInfoPage';
 import InvoicePage from 'pages/InvoicePage';
+import SkeletonFooter from 'skeletons/SkeletonFooter';
 function App() {
   return (
     <Router>
@@ -26,6 +27,9 @@ function App() {
       </Route>
       <Route path="/invoice">
         <InvoicePage />
+      </Route>
+      <Route path="/test">
+        <SkeletonFooter theme="dark" />
       </Route>
     </Router>
   );
