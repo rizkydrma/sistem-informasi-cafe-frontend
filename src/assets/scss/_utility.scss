@@ -63,6 +63,10 @@
   .w-#{$length} {
     width: #{$length + '%'};
   }
+
+  .h-#{$length} {
+    height: #{$length * 10px} !important;
+  }
 }
 
 @each $display in $displays {
@@ -154,6 +158,13 @@
 
 .content-space-between {
   justify-content: space-between;
+}
+.content-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
 }
 
 .content-end {
