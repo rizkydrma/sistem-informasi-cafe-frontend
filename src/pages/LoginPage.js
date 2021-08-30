@@ -31,7 +31,7 @@ export default function LoginPage() {
             <Button
               href="#"
               type="link"
-              className="d-block btn-danger"
+              className="btn d-block btn-danger"
               isLarge
               hasShadow
             >

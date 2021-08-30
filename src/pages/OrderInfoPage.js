@@ -4,7 +4,6 @@ import Navbar from 'components/Navbar';
 import ImageCoffee from 'assets/images/coffe.jpg';
 import Stepper from 'elements/Stepper/Stepper';
 import SkeletonDescription from 'skeletons/SkeletonDescription';
-import SkeletonFooter from 'skeletons/SkeletonFooter';
 import SkeletonElement from 'skeletons/SkeletonElement';
 
 export default function OrderInfoPage() {
