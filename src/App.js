@@ -1,35 +1,33 @@
+import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import LoginPage from 'pages/LoginPage';
 
-import HomePage from 'pages/HomePage';
-import DetailProductPage from 'pages/DetailProductPage';
-import ShoppingCartPage from 'pages/ShoppingCartPage';
-import OrderInfoPage from 'pages/OrderInfoPage';
-import InvoicePage from 'pages/InvoicePage';
-import SkeletonFooter from 'skeletons/SkeletonFooter';
+import Login from 'pages/Login';
+import Home from 'pages/Home';
+import DetailProduct from 'pages/DetailProduct';
+import Cart from 'pages/Cart';
+import Order from 'pages/Order';
+import Invoice from 'pages/Invoice';
+
 function App() {
   return (
     <Router>
       <Route path="/" exact>
-        <LoginPage />
+        <Login />
       </Route>
       <Route path="/home">
-        <HomePage />
+        <Home />
       </Route>
       <Route path="/product">
-        <DetailProductPage />
+        <DetailProduct />
       </Route>
-      <Route path="/shopping-cart">
-        <ShoppingCartPage />
+      <Route path="/cart">
+        <Cart />
       </Route>
       <Route path="/order-info">
-        <OrderInfoPage />
+        <Order />
       </Route>
       <Route path="/invoice">
-        <InvoicePage />
-      </Route>
-      <Route path="/test">
-        <SkeletonFooter theme="dark" />
+        <Invoice />
       </Route>
     </Router>
   );
