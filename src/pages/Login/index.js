@@ -1,8 +1,28 @@
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { userLogin } from 'features/Auth/actions';
+import { rules } from './validation';
+
 import BrandLogo from 'elements/Brand/BrandLogo';
 import Button from 'elements/Button/Button';
-import React from 'react';
 
-export default function LoginPage() {
+export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const onSubmit = (data) => {
+    let { username, notable } = data;
+    dispatch(userLogin(username, notable));
+    history.push('/home');
+  };
+
   return (
     <div className="login">
       <div className="container_login">
@@ -13,28 +33,33 @@ export default function LoginPage() {
             Please enter your name and <br />
             table number before ordering, thank you
           </h5>
-          <form action="">
-            <input
-              type="text"
-              name="no"
-              id="no"
-              className="form-control mb-10"
-              placeholder="enter table number"
-            />
-            <input
-              type="text"
-              name="name"
-              id="name"
-              className="form-control mb-10"
-              placeholder="enter your name"
-            />
-            <Button
-              href="#"
-              type="link"
-              className="btn d-block btn-danger"
-              isLarge
-              hasShadow
-            >
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="form-group">
+              <input
+                name="username"
+                id="username"
+                ref={register(rules.username)}
+                className={`form-control ${errors.username ? 'invalid' : ''} `}
+                placeholder="enter your name"
+              />
+              {errors.username && (
+                <span className="error">*{errors.username.message}</span>
+              )}
+            </div>
+            <div className="form-group">
+              <input
+                name="notable"
+                id="notable"
+                ref={register(rules.notable)}
+                className={`form-control ${errors.notable ? 'invalid' : ''} `}
+                placeholder="enter your name"
+              />
+              {errors.notable && (
+                <span className="error">*{errors.notable.message}</span>
+              )}
+            </div>
+
+            <Button className="btn d-block btn-danger" isLarge hasShadow submit>
               Let's Make Order
             </Button>
           </form>

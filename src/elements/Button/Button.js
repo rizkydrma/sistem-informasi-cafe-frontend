@@ -46,6 +46,7 @@ export default function Button(props) {
       className={className.join(' ')}
       style={props.style}
       onClick={onClick}
+      type={`${props.submit ? 'submit' : 'button'}`}
     >
       {props.children}
     </button>
@@ -58,4 +59,5 @@ Button.propTypes = {
   isLarge: propTypes.bool,
   isSmall: propTypes.bool,
   hasShadow: propTypes.bool,
+  submit: propTypes.bool,
 };
