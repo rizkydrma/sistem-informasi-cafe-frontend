@@ -8,32 +8,37 @@ import {
   faUtensils,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function Category() {
+export default function Category({ onChange }) {
   const [active, setActive] = useState('All');
   const categories = [
     {
       id: 1,
       name: 'All',
       icon: faSeedling,
+      slug: '',
     },
     {
       id: 2,
       name: 'Coffe',
+      slug: 'coffe',
       icon: faCoffee,
     },
     {
       id: 3,
-      name: 'Drinks',
+      name: 'Drink',
+      slug: 'drink',
       icon: faWineGlass,
     },
     {
       id: 4,
       name: 'Snack',
+      slug: 'snack',
       icon: faCookieBite,
     },
     {
       id: 5,
       name: 'Main Course',
+      slug: 'main-course',
       icon: faUtensils,
     },
   ];
@@ -50,7 +55,10 @@ export default function Category() {
             active === category.name ? 'active' : ''
           }`}
           key={category.id}
-          onClick={() => handleActiveItem(category.name)}
+          onClick={() => {
+            handleActiveItem(category.slug);
+            onChange(category.slug);
+          }}
         >
           <FontAwesomeIcon className="category_icon" icon={category.icon} />
           <span className="category_link">{category.name}</span>

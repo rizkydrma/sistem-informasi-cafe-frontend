@@ -16,6 +16,8 @@ import {
   fetchProducts,
   goToNextPage,
   goToPrevPage,
+  setCategory,
+  setKeyword,
   setPage,
 } from 'features/Products/actions';
 
@@ -26,7 +28,7 @@ export default function HomePage() {
 
   useEffect(() => {
     dispatch(fetchProducts());
-  }, [dispatch, products.currentPage]);
+  }, [dispatch, products.currentPage, products.keyword, products.category]);
 
   return (
     <>
@@ -42,9 +44,11 @@ export default function HomePage() {
               id="search"
               className="form-control search-input"
               placeholder="find what do you want..."
+              value={products.keyword}
+              onChange={(e) => dispatch(setKeyword(e.target.value))}
             />
           </form>
-          <Category />
+          <Category onChange={(category) => dispatch(setCategory(category))} />
         </div>
         <div className="main_home_page product_list">
           <div className="container">
