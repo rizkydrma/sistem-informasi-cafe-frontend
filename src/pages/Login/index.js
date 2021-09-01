@@ -7,6 +7,7 @@ import { rules } from './validation';
 
 import BrandLogo from 'elements/Brand/BrandLogo';
 import Button from 'elements/Button/Button';
+import { login } from 'api/auth';
 
 export default function Login() {
   const {
@@ -17,10 +18,16 @@ export default function Login() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const onSubmit = (data) => {
-    let { username, notable } = data;
-    dispatch(userLogin(username, notable));
-    history.push('/home');
+  const onSubmit = async ({ username, notable }) => {
+    let { data } = await login(username, notable);
+
+    if (data.error) {
+      console.log(data.error, data.message);
+    } else {
+      let { username, notable, token } = data;
+      dispatch(userLogin(username, notable, token));
+      history.push('/home');
+    }
   };
 
   return (
