@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Category from 'components/Category';
 import Button from 'elements/Button/Button';
 import SkeletonCard from 'skeletons/SkeletonCard';
@@ -6,18 +6,21 @@ import Navbar from 'components/Navbar';
 import FooterNav from 'components/FooterNav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faPlus, faStar } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { config } from '../../config';
+import { compactNumber } from 'utils/utility';
 
-import ImageCoffee from 'assets/images/coffe.jpg';
+import { fetchProducts } from 'features/Products/actions';
 
 export default function HomePage() {
-  const [products, setProducts] = useState(false);
   const titlePage = 'Search Product';
+  let dispatch = useDispatch();
+  let products = useSelector((state) => state.products);
 
   useEffect(() => {
-    setTimeout(() => {
-      setProducts(true);
-    }, 5000);
-  }, [products]);
+    console.log('ok');
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   return (
     <>
@@ -35,43 +38,45 @@ export default function HomePage() {
               placeholder="find what do you want..."
             />
           </form>
+          <Category />
         </div>
-        <Category />
         <div className="main_home_page product_list">
           <div className="container">
             <div className="row">
-              {products && (
-                <div className="col-xs-6 col-sm-4 col-md-3">
-                  <div className="card card_product">
-                    <figure className="image-wrapper">
-                      <img
-                        src={ImageCoffee}
-                        alt="kopi pait"
-                        className="img-cover"
-                      />
-                      <div className="tag">
-                        <FontAwesomeIcon icon={faStar} />
-                        <span>4.7</span>
-                      </div>
-                    </figure>
-                    <div className="meta-wrapper">
-                      <h5>Cappucino</h5>
-                      <span>Signature</span>
+              {products.status === 'success' &&
+                products.data.map((product) => (
+                  <div className="col-xs-6 col-sm-4 col-md-3" key={product._id}>
+                    <div className="card card_product">
+                      <figure className="image-wrapper">
+                        <img
+                          src={`${config.api_host}/upload/${product.image_url}`}
+                          alt="kopi pait"
+                          className="img-cover"
+                        />
+                        <div className="tag">
+                          <FontAwesomeIcon icon={faStar} />
+                          <span>{product.rating}</span>
+                        </div>
+                      </figure>
+                      <div className="meta-wrapper">
+                        <h5>{product.name}</h5>
+                        {product.variant && <span>{product.variant}</span>}
 
-                      <div className="price">
-                        <h5>
-                          Rp.<span>18K</span>
-                        </h5>
-                        <Button className="add_cart">
-                          <FontAwesomeIcon icon={faPlus} />
-                        </Button>
+                        <div className="price">
+                          <h5>
+                            Rp.<span>{compactNumber(product.price)}</span>
+                          </h5>
+                          <Button className="add_cart">
+                            <FontAwesomeIcon icon={faPlus} />
+                          </Button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              )}
+                ))}
 
-              {!products &&
+              {products.status === 'process' &&
+                !products.data.length &&
                 [1, 2, 3, 4, 5, 6].map((data, index) => (
                   <div className="col-xs-6 col-sm-4 col-md-3" key={index}>
                     <SkeletonCard theme="dark" />

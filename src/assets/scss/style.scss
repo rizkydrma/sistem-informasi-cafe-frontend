@@ -324,19 +324,23 @@ section {
 
   &.top_bar {
     position: fixed;
-    padding: 0 32px;
+    padding: 10px 32px;
     top: 0;
     left: 0;
     right: 0;
-    margin-top: 75px;
+    margin-top: 70px;
     z-index: 4;
     background-color: $backgroundColor;
   }
 }
 
 .product_list {
-  padding-top: 135px;
+  padding-top: 225px;
   margin-bottom: 75px;
+
+  @media (min-width: 768px) {
+    padding-top: 150px;
+  }
 }
 
 .slogan {
@@ -502,8 +506,12 @@ section {
   padding: 12px;
 
   &.card_product {
-    min-height: 230px;
+    min-height: 225px;
     box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.25);
+
+    @media (min-width: 768px) {
+      min-height: 260px;
+    }
 
     .meta-wrapper {
       margin-top: 10px;
@@ -573,7 +581,7 @@ section {
     min-height: 20px;
     padding: 0.25rem 0.5rem;
     border-radius: 0 0 0 5px;
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: rgba(0, 0, 0, 0.55);
 
     svg {
       color: yellow;
@@ -597,6 +605,10 @@ section {
   position: relative;
   height: 125px;
   min-height: 100%;
+
+  @media (min-width: 768px) {
+    height: 150px;
+  }
 }
 
 .main_detail_page {
