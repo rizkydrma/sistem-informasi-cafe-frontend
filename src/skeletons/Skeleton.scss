@@ -35,6 +35,19 @@
     height: 25px;
     border-radius: 10px;
   }
+
+  &.paginate {
+    width: 20px;
+    height: 20px;
+  }
+  &.paginate-arrow {
+    width: 30px;
+    height: 20px;
+  }
+
+  &.dark {
+    background-color: #9a9da9;
+  }
 }
 
 .skeleton-wrapper {

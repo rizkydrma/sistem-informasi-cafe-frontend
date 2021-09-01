@@ -40,7 +40,7 @@ export const fetchProducts = () => {
   return async (dispatch, getState) => {
     dispatch(startFetchingProducts());
 
-    let perPage = getState().products.perPage || 10;
+    let perPage = getState().products.perPage || 2;
     let currentPage = getState().products.currentPage || 1;
     let tags = getState().products.tags || [];
     let keyword = getState().products.keyword || '';
@@ -59,7 +59,6 @@ export const fetchProducts = () => {
         data: { data, count },
       } = await debounceFetchProducts(params);
       dispatch(successFetchingProducts({ data, count }));
-      console.log(data);
     } catch (err) {
       dispatch(errorFetchingProducts());
     }

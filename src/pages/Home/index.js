@@ -9,8 +9,15 @@ import { faSearch, faPlus, faStar } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { config } from '../../config';
 import { compactNumber } from 'utils/utility';
+import Pagination from 'elements/Pagination/Pagination';
+import SkeletonPagination from 'skeletons/SkeletonPagination';
 
-import { fetchProducts } from 'features/Products/actions';
+import {
+  fetchProducts,
+  goToNextPage,
+  goToPrevPage,
+  setPage,
+} from 'features/Products/actions';
 
 export default function HomePage() {
   const titlePage = 'Search Product';
@@ -18,9 +25,8 @@ export default function HomePage() {
   let products = useSelector((state) => state.products);
 
   useEffect(() => {
-    console.log('ok');
     dispatch(fetchProducts());
-  }, [dispatch]);
+  }, [dispatch, products.currentPage]);
 
   return (
     <>
@@ -76,13 +82,29 @@ export default function HomePage() {
                 ))}
 
               {products.status === 'process' &&
-                !products.data.length &&
-                [1, 2, 3, 4, 5, 6].map((data, index) => (
-                  <div className="col-xs-6 col-sm-4 col-md-3" key={index}>
+                [1, 2, 3, 4, 5, 6].map((number) => (
+                  <div className="col-xs-6 col-sm-4 col-md-3" key={number}>
                     <SkeletonCard theme="dark" />
                   </div>
                 ))}
             </div>
+          </div>
+
+          <div className="d-flex content-center">
+            {products.status === 'success' && (
+              <Pagination
+                totalItems={products.totalItems}
+                page={products.currentPage}
+                perPage={products.perPage}
+                onChange={(page) => dispatch(setPage(page))}
+                onNext={(_) => dispatch(goToNextPage())}
+                onPrev={(_) => dispatch(goToPrevPage())}
+              />
+            )}
+
+            {products.status === 'process' && (
+              <SkeletonPagination theme="dark" />
+            )}
           </div>
         </div>
       </section>

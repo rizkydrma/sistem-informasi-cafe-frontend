@@ -12,6 +12,7 @@ import Order from 'pages/Order';
 import Invoice from 'pages/Invoice';
 
 import { listen } from 'app/listener';
+import SkeletonPagination from 'skeletons/SkeletonPagination';
 
 function App() {
   useEffect(() => {
@@ -38,6 +39,9 @@ function App() {
         </Route>
         <Route path="/invoice">
           <Invoice />
+        </Route>
+        <Route path="/test">
+          <SkeletonPagination />
         </Route>
       </Router>
     </Provider>

@@ -22,7 +22,7 @@ const initialState = {
   data: [],
   currentPage: 1,
   totalItems: -1,
-  perPage: 12,
+  perPage: 8,
   keyword: '',
   category: '',
   tags: [],

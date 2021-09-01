@@ -1,0 +1,55 @@
+@import '../../assets/scss/colorVariables';
+
+.hide {
+  display: none;
+  visibility: hidden;
+  height: 0;
+}
+
+.pagination\:container {
+  display: flex;
+  align-items: center;
+
+  button {
+    border: none;
+    background-color: $secondaryColor;
+    color: $textColor;
+  }
+}
+
+.arrow\:text {
+  display: block;
+  vertical-align: middle;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.pagination\:number {
+  --size: 32px;
+  --margin: 6px;
+  margin: 0 var(--margin);
+  border-radius: 6px;
+  background: $secondaryColor;
+  max-width: auto;
+  min-width: var(--size);
+  height: var(--size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0 6px;
+  @media (hover: hover) {
+    &:hover {
+      // ose darken qysh te dush
+      background: lighten($secondaryColor, 3%);
+    }
+  }
+  &:active {
+    background: lighten($secondaryColor, 3%);
+  }
+}
+
+.pagination\:active {
+  background: lighten($primaryColor, 3%);
+  position: relative;
+}
