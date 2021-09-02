@@ -13,10 +13,12 @@ import Invoice from 'pages/Invoice';
 
 import { listen } from 'app/listener';
 import SkeletonPagination from 'skeletons/SkeletonPagination';
+import { getCart } from 'api/cart';
 
 function App() {
   useEffect(() => {
     listen();
+    getCart();
   }, []);
 
   return (
