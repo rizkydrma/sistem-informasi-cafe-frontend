@@ -1,4 +1,10 @@
-import { ADD_ITEM, SET_ITEMS, CLEAR_ITEMS, REMOVE_ITEM } from './constants';
+import {
+  ADD_ITEM,
+  SET_ITEMS,
+  CLEAR_ITEMS,
+  REMOVE_ITEM,
+  DELETE_ITEM,
+} from './constants';
 
 const initialState = localStorage.getItem('cart')
   ? JSON.parse(localStorage.getItem('cart'))
@@ -23,6 +29,9 @@ export default function reducer(state = initialState, action) {
           qty: item._id === action.item._id ? item.qty - 1 : item.qty,
         }))
         .filter((item) => item.qty > 0);
+
+    case DELETE_ITEM:
+      return state.filter((item) => item._id !== action.item._id);
 
     case CLEAR_ITEMS:
       return [];

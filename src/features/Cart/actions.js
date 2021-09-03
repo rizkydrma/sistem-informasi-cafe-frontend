@@ -1,4 +1,10 @@
-import { ADD_ITEM, REMOVE_ITEM, CLEAR_ITEMS, SET_ITEMS } from './constants';
+import {
+  ADD_ITEM,
+  REMOVE_ITEM,
+  CLEAR_ITEMS,
+  SET_ITEMS,
+  DELETE_ITEM,
+} from './constants';
 
 export function addItem(item) {
   return {
@@ -13,6 +19,13 @@ export function addItem(item) {
 export function removeItem(item) {
   return {
     type: REMOVE_ITEM,
+    item,
+  };
+}
+
+export function deleteItem(item) {
+  return {
+    type: DELETE_ITEM,
     item,
   };
 }

@@ -1,23 +1,15 @@
 import Navbar from 'components/Navbar';
-import React, { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import ImageCoffee from 'assets/images/coffe.jpg';
-import Counter from 'elements/Counter/Counter';
 import Button from 'elements/Button/Button';
 import SkeletonOrderItem from 'skeletons/SkeletonOrderItem';
 import SkeletonFooter from 'skeletons/SkeletonFooter';
+import RowCartProduct from 'components/RowCartProduct';
 
-export default function ShoppingCartPage() {
+export default function Cart() {
   const titlePage = 'Shopping Cart';
-  const [products, setProducts] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setProducts(true);
-    }, 6000);
-  }, [products]);
+  let carts = useSelector((state) => state.cart);
 
   return (
     <>
@@ -25,7 +17,7 @@ export default function ShoppingCartPage() {
       <div className="info-order shopping-cart-page">
         <div className="info-order-item">
           <div className="footerbar-detail-product footerbar-detail-product-desk">
-            {products && (
+            {carts && (
               <>
                 <div className="sub-total">
                   <h5 className="display-5">Subtotal</h5>
@@ -51,67 +43,28 @@ export default function ShoppingCartPage() {
               </>
             )}
 
-            {!products && <SkeletonFooter theme="dark" />}
+            {!carts && <SkeletonFooter theme="dark" />}
           </div>
         </div>
         <div className="info-order-item info-order-item-cart">
-          {products && (
+          {carts && (
             <table className="shopping-cart">
               <tbody>
-                <tr>
-                  <td>
-                    <figure className="image-wrapper">
-                      <img src={ImageCoffee} alt="kopi" className="img-cover" />
-                    </figure>
-                  </td>
-                  <td>
-                    <h4 className="display-4">Cappucino</h4>
-                    <span className="display-5 color-shadow-text">
-                      Signature
-                    </span>
-                    <h5 className="display-4 mt-10 color-primary">Rp.18K</h5>
-                  </td>
-                  <td>
-                    <FontAwesomeIcon
-                      icon={faTimes}
-                      className="icon-close mb-20"
-                    />
-                    <Counter number="1" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <figure className="image-wrapper">
-                      <img src={ImageCoffee} alt="kopi" className="img-cover" />
-                    </figure>
-                  </td>
-                  <td>
-                    <h4 className="display-4">Cappucino</h4>
-                    <span className="display-5 color-shadow-text">
-                      Signature
-                    </span>
-                    <h5 className="display-4 mt-10 color-primary">Rp.18K</h5>
-                  </td>
-                  <td>
-                    <FontAwesomeIcon
-                      icon={faTimes}
-                      className="icon-close mb-20"
-                    />
-                    <Counter number="1" />
-                  </td>
-                </tr>
+                {carts.map((cart) => (
+                  <RowCartProduct cart={cart} key={cart._id} />
+                ))}
               </tbody>
             </table>
           )}
 
-          {!products &&
+          {!carts &&
             [1, 2, 3, 4].map((data, i) => (
               <SkeletonOrderItem theme="dark" key={i} />
             ))}
         </div>
       </div>
       <div className="footerbar footerbar-detail-product ">
-        {products && (
+        {carts && (
           <>
             <div className="sub-total">
               <h5 className="display-5">Subtotal</h5>
@@ -136,7 +89,7 @@ export default function ShoppingCartPage() {
             </Button>
           </>
         )}
-        {!products && <SkeletonFooter theme="dark" />}
+        {!carts && <SkeletonFooter theme="dark" />}
       </div>
     </>
   );

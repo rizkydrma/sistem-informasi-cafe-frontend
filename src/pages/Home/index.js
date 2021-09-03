@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import Category from 'components/Category';
-import Button from 'elements/Button/Button';
+
 import SkeletonCard from 'skeletons/SkeletonCard';
 import Navbar from 'components/Navbar';
 import FooterNav from 'components/FooterNav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faPlus, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { config } from '../../config';
-import { compactNumber } from 'utils/utility';
+
 import Pagination from 'elements/Pagination/Pagination';
 import SkeletonPagination from 'skeletons/SkeletonPagination';
 
@@ -20,6 +19,8 @@ import {
   setKeyword,
   setPage,
 } from 'features/Products/actions';
+import { addItem } from 'features/Cart/actions';
+import CardProduct from 'components/CardProduct';
 
 export default function HomePage() {
   const titlePage = 'Search Product';
@@ -55,38 +56,15 @@ export default function HomePage() {
             <div className="row">
               {products.status === 'success' &&
                 products.data.map((product) => (
-                  <div className="col-xs-6 col-sm-4 col-md-3" key={product._id}>
-                    <div className="card card_product">
-                      <figure className="image-wrapper">
-                        <img
-                          src={`${config.api_host}/upload/${product.image_url}`}
-                          alt="kopi pait"
-                          className="img-cover"
-                        />
-                        <div className="tag">
-                          <FontAwesomeIcon icon={faStar} />
-                          <span>{product.rating}</span>
-                        </div>
-                      </figure>
-                      <div className="meta-wrapper">
-                        <h5>{product.name}</h5>
-                        {product.variant && <span>{product.variant}</span>}
-
-                        <div className="price">
-                          <h5>
-                            Rp.<span>{compactNumber(product.price)}</span>
-                          </h5>
-                          <Button className="add_cart">
-                            <FontAwesomeIcon icon={faPlus} />
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <CardProduct
+                    product={product}
+                    onAddProduct={() => dispatch(addItem(product))}
+                    key={product._id}
+                  />
                 ))}
 
               {products.status === 'process' &&
-                [1, 2, 3, 4, 5, 6].map((number) => (
+                [1, 2, 3, 4].map((number) => (
                   <div className="col-xs-6 col-sm-4 col-md-3" key={number}>
                     <SkeletonCard theme="dark" />
                   </div>
