@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHome,
@@ -7,12 +6,13 @@ import {
   faUser,
   faBell,
 } from '@fortawesome/free-solid-svg-icons';
+import Button from 'elements/Button/Button';
 const navButton = [
   {
     id: 1,
     name: 'Home',
     icon: faHome,
-    href: '/home',
+    href: '/',
   },
   {
     id: 2,
@@ -34,31 +34,28 @@ const navButton = [
   },
 ];
 export default function BottomBar() {
-  const [active, setActive] = useState('/home');
-  const location = useLocation();
-
-  const handleChange = (nav) => {
-    setActive(nav);
-  };
+  const [active, setActive] = useState('Home');
 
   return (
     <nav className="footerbar">
-      {navButton.map((nav) => (
-        <label htmlFor={nav.name} key={nav.id}>
-          <input
-            type="radio"
-            name="group"
-            id={nav.name}
-            className="nav-input"
-            defaultChecked={active === location.pathname ? true : false}
-            onChange={() => handleChange(nav.href)}
-          />
-          <span className="nav-button">
-            <FontAwesomeIcon icon={nav.icon} className="nav-icon" />
+      <ul className="footer-nav">
+        {navButton.map((nav) => (
+          <li
+            className={`nav-item ${active === nav.name ? 'active' : ''}`}
+            key={nav.id}
+          >
+            <Button
+              className="btn nav-button"
+              type="link"
+              href={nav.href}
+              onClick={(_) => setActive(nav.name)}
+            >
+              <FontAwesomeIcon icon={nav.icon} className="nav-icon" />
+            </Button>
             <span className="nav-text">{nav.name}</span>
-          </span>
-        </label>
-      ))}
+          </li>
+        ))}
+      </ul>
     </nav>
   );
 }
