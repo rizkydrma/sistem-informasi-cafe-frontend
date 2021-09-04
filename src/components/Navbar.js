@@ -18,7 +18,7 @@ const navButton = [
     id: 1,
     name: 'Home',
     icon: faHome,
-    href: '/home',
+    href: '/',
   },
   {
     id: 2,
@@ -44,7 +44,7 @@ export default function Navbar(props) {
   const location = useLocation();
   const history = useHistory();
   useEffect(() => {
-    location.pathname !== '/home' ? setBack(true) : setBack(false);
+    location.pathname !== '/' ? setBack(true) : setBack(false);
   }, [location]);
 
   const handleDrawer = () => {
@@ -64,7 +64,7 @@ export default function Navbar(props) {
         </Button>
         <Button
           className={`navbar-toggler ${back ? 'visible' : 'not-visible'}`}
-          onClick={() => history.push('/home')}
+          onClick={() => history.push('/')}
         >
           <FontAwesomeIcon icon={faChevronLeft} />
         </Button>

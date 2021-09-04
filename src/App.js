@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from 'app/store';
 
@@ -10,9 +9,12 @@ import DetailProduct from 'pages/DetailProduct';
 import Cart from 'pages/Cart';
 import Order from 'pages/Order';
 import Invoice from 'pages/Invoice';
+import Register from 'pages/Register';
+import SkeletonPagination from 'skeletons/SkeletonPagination';
+import GuardRoute from 'components/GuardRoute';
+import GuestOnlyRoute from 'components/GuestOnlyRoute';
 
 import { listen } from 'app/listener';
-import SkeletonPagination from 'skeletons/SkeletonPagination';
 import { getCart } from 'api/cart';
 
 function App() {
@@ -24,27 +26,33 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Route path="/" exact>
-          <Login />
-        </Route>
-        <Route path="/home">
-          <Home />
-        </Route>
-        <Route path="/product">
-          <DetailProduct />
-        </Route>
-        <Route path="/cart">
-          <Cart />
-        </Route>
-        <Route path="/order-info">
-          <Order />
-        </Route>
-        <Route path="/invoice">
-          <Invoice />
-        </Route>
-        <Route path="/test">
-          <SkeletonPagination />
-        </Route>
+        <Switch>
+          <GuestOnlyRoute path="/login">
+            <Login />
+          </GuestOnlyRoute>
+          <GuestOnlyRoute path="/register">
+            <Register />
+          </GuestOnlyRoute>
+
+          <GuardRoute path="/" exact>
+            <Home />
+          </GuardRoute>
+          <GuardRoute path="/product">
+            <DetailProduct />
+          </GuardRoute>
+          <GuardRoute path="/cart">
+            <Cart />
+          </GuardRoute>
+          <GuardRoute path="/order-info">
+            <Order />
+          </GuardRoute>
+          <GuardRoute path="/invoice">
+            <Invoice />
+          </GuardRoute>
+          <Route path="/test">
+            <SkeletonPagination />
+          </Route>
+        </Switch>
       </Router>
     </Provider>
   );
