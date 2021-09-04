@@ -10,7 +10,7 @@ import Cart from 'pages/Cart';
 import Order from 'pages/Order';
 import Invoice from 'pages/Invoice';
 import Register from 'pages/Register';
-import SkeletonPagination from 'skeletons/SkeletonPagination';
+import FooterNav from 'components/FooterNav';
 import GuardRoute from 'components/GuardRoute';
 import GuestOnlyRoute from 'components/GuestOnlyRoute';
 
@@ -50,7 +50,7 @@ function App() {
             <Invoice />
           </GuardRoute>
           <Route path="/test">
-            <SkeletonPagination />
+            <FooterNav />
           </Route>
         </Switch>
       </Router>

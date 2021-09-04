@@ -1,10 +1,9 @@
 import { USER_LOGOUT, USER_LOGIN } from './constants';
 
-export function userLogin(username, notable, token) {
+export function userLogin(user, token) {
   return {
     type: USER_LOGIN,
-    username,
-    notable,
+    user,
     token,
   };
 }

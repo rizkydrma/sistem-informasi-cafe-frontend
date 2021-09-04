@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -9,25 +9,44 @@ import BrandLogo from 'elements/Brand/BrandLogo';
 import Button from 'elements/Button/Button';
 import { login } from 'api/auth';
 
+const statusList = {
+  idle: 'idle',
+  proccess: 'proccess',
+  success: 'success',
+  error: 'error',
+};
+
 export default function Login() {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm();
+  const [status, setStatus] = useState(statusList.idle);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const onSubmit = async ({ username, notable }) => {
-    let { data } = await login(username, notable);
+  const onSubmit = async ({ email, password }) => {
+    setStatus(statusList.proccess);
+
+    let { data } = await login(email, password);
 
     if (data.error) {
-      console.log(data.error, data.message);
+      setError('password', {
+        type: 'invalidCredential',
+        message: data.message,
+      });
+      console.log(errors);
+
+      setStatus(statusList.error);
     } else {
-      let { username, notable, token } = data;
-      dispatch(userLogin(username, notable, token));
-      history.push('/home');
+      let { user, token } = data;
+      dispatch(userLogin(user, token));
+      history.push('/');
     }
+
+    setStatus(statusList.success);
   };
 
   return (
@@ -43,30 +62,37 @@ export default function Login() {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
               <input
-                name="username"
-                id="username"
-                ref={register(rules.username)}
-                className={`form-control ${errors.username ? 'invalid' : ''} `}
-                placeholder="enter your name"
+                name="email"
+                id="email"
+                ref={register(rules.email)}
+                className={`form-control ${errors.email ? 'invalid' : ''} `}
+                placeholder="enter your email"
               />
-              {errors.username && (
-                <span className="error">*{errors.username.message}</span>
+              {errors.email && (
+                <span className="error">*{errors.email.message}</span>
               )}
             </div>
             <div className="form-group">
               <input
-                name="notable"
-                id="notable"
-                ref={register(rules.notable)}
-                className={`form-control ${errors.notable ? 'invalid' : ''} `}
-                placeholder="enter your name"
+                type="password"
+                name="password"
+                id="password"
+                ref={register(rules.password)}
+                className={`form-control ${errors.password ? 'invalid' : ''} `}
+                placeholder="enter your password"
               />
-              {errors.notable && (
-                <span className="error">*{errors.notable.message}</span>
+              {errors.password && (
+                <span className="error">*{errors.password.message}</span>
               )}
             </div>
 
-            <Button className="btn d-block btn-danger" isLarge hasShadow submit>
+            <Button
+              className="btn d-block btn-danger"
+              isLarge
+              hasShadow
+              submit
+              disable={status === 'proccess'}
+            >
               Let's Make Order
             </Button>
           </form>

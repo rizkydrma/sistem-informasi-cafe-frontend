@@ -29,8 +29,6 @@ export async function getCart() {
     },
   });
 
-  console.log(data);
-
   if (!data.error) {
     store.dispatch(setItems(data));
   }

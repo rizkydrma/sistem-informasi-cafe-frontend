@@ -7,13 +7,11 @@ let initialState = localStorage.getItem('auth')
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case USER_LOGIN:
-      return {
-        username: action.username,
-        notable: action.notable,
-        token: action.token,
-      };
+      return { user: action.user, token: action.token };
+
     case USER_LOGOUT:
-      return { username: null, notable: null, token: null };
+      return { user: null, token: null };
+
     default:
       return state;
   }
