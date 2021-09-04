@@ -1,5 +1,5 @@
-@import 'variables';
-@import 'colorVariables';
+@import './variables';
+@import './colorVariables';
 
 .color-primary {
   color: $primaryColor;
@@ -122,6 +122,8 @@
   border-radius: 5px;
   text-align: center;
   display: inline-block;
+  background-color: transparent;
+  color: $shadowColorText;
 
   &:hover {
     cursor: pointer;

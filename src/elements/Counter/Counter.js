@@ -7,11 +7,11 @@ import Button from 'elements/Button/Button';
 export default function Counter({ cartItems, onIncrement, onDecrement, qty }) {
   return (
     <div className="counter">
-      <Button onClick={() => onDecrement(cartItems)}>
+      <Button className="btn" onClick={() => onDecrement(cartItems)}>
         <FontAwesomeIcon icon={faMinus} />
       </Button>
       <span>{qty}</span>
-      <Button onClick={() => onIncrement(cartItems)}>
+      <Button className="btn" onClick={() => onIncrement(cartItems)}>
         <FontAwesomeIcon icon={faPlus} />
       </Button>
     </div>

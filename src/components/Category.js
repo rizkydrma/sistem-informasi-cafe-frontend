@@ -7,6 +7,7 @@ import {
   faCookieBite,
   faUtensils,
 } from '@fortawesome/free-solid-svg-icons';
+import { useEffect } from 'react';
 
 export default function Category({ onChange }) {
   const [active, setActive] = useState('All');
@@ -15,7 +16,7 @@ export default function Category({ onChange }) {
       id: 1,
       name: 'All',
       icon: faSeedling,
-      slug: '',
+      slug: 'all',
     },
     {
       id: 2,
@@ -43,6 +44,10 @@ export default function Category({ onChange }) {
     },
   ];
 
+  useEffect(() => {
+    setActive('all');
+  }, []);
+
   const handleActiveItem = (category) => {
     setActive(category);
   };
@@ -52,7 +57,7 @@ export default function Category({ onChange }) {
       {categories.map((category) => (
         <div
           className={`category_item ${
-            active === category.name ? 'active' : ''
+            active === category.slug ? 'active' : ''
           }`}
           key={category.id}
           onClick={() => {

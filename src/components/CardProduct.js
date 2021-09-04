@@ -3,7 +3,7 @@ import Button from 'elements/Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faStar } from '@fortawesome/free-solid-svg-icons';
 import { config } from 'config';
-import { compactNumber } from 'utils/utility';
+import { formatRupiah } from 'utils/utility';
 
 export default function CardProduct({ product, onAddProduct }) {
   return (
@@ -26,7 +26,7 @@ export default function CardProduct({ product, onAddProduct }) {
 
           <div className="price">
             <h5>
-              Rp.<span>{compactNumber(product.price)}</span>
+              <span>{formatRupiah(product.price)}</span>
             </h5>
             <Button className="add_cart" onClick={(_) => onAddProduct()}>
               <FontAwesomeIcon icon={faPlus} />

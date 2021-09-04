@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { config } from 'config';
 import { compactNumber } from 'utils/utility';
+import Button from 'elements/Button/Button';
 
 export default function RowCartProduct({ cart }) {
   let dispatch = useDispatch();
@@ -32,9 +33,9 @@ export default function RowCartProduct({ cart }) {
         </h5>
       </td>
       <td>
-        <div onClick={(_) => dispatch(deleteItem(cart))}>
+        <Button className="btn" onClick={(_) => dispatch(deleteItem(cart))}>
           <FontAwesomeIcon icon={faTimes} className="icon-close mb-20" />
-        </div>
+        </Button>
         <Counter
           cartItems={cart}
           onIncrement={(cart) => dispatch(addItem(cart))}

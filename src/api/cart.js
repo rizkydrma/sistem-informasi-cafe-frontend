@@ -5,7 +5,7 @@ import { setItems } from 'features/Cart/actions';
 
 export async function saveCart(token, cart) {
   return await axios.put(
-    `${config.api_host}/api/cart`,
+    `${config.api_host}/api/carts`,
     { items: cart },
     {
       headers: {
@@ -25,8 +25,11 @@ export async function getCart() {
   let { data } = await axios.get(`${config.api_host}/api/carts`, {
     headers: {
       authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     },
   });
+
+  console.log(data);
 
   if (!data.error) {
     store.dispatch(setItems(data));

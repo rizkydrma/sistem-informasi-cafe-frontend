@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHome,
@@ -6,30 +7,40 @@ import {
   faUser,
   faBell,
 } from '@fortawesome/free-solid-svg-icons';
-
+const navButton = [
+  {
+    id: 1,
+    name: 'Home',
+    icon: faHome,
+    href: '/home',
+  },
+  {
+    id: 2,
+    name: 'Liked',
+    icon: faHeart,
+    href: '/liked',
+  },
+  {
+    id: 3,
+    name: 'Notification',
+    icon: faBell,
+    href: '/notification',
+  },
+  {
+    id: 4,
+    name: 'Profil',
+    icon: faUser,
+    href: '/profil',
+  },
+];
 export default function BottomBar() {
-  const navButton = [
-    {
-      id: 1,
-      name: 'Home',
-      icon: faHome,
-    },
-    {
-      id: 2,
-      name: 'Liked',
-      icon: faHeart,
-    },
-    {
-      id: 3,
-      name: 'Notification',
-      icon: faBell,
-    },
-    {
-      id: 4,
-      name: 'Profil',
-      icon: faUser,
-    },
-  ];
+  const [active, setActive] = useState('/home');
+  const location = useLocation();
+
+  const handleChange = (nav) => {
+    setActive(nav);
+  };
+
   return (
     <nav className="footerbar">
       {navButton.map((nav) => (
@@ -39,6 +50,8 @@ export default function BottomBar() {
             name="group"
             id={nav.name}
             className="nav-input"
+            defaultChecked={active === location.pathname ? true : false}
+            onChange={() => handleChange(nav.href)}
           />
           <span className="nav-button">
             <FontAwesomeIcon icon={nav.icon} className="nav-icon" />
