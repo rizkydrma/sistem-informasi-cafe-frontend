@@ -10,12 +10,12 @@ import Cart from 'pages/Cart';
 import Order from 'pages/Order';
 import Invoice from 'pages/Invoice';
 import Register from 'pages/Register';
-import FooterNav from 'components/FooterNav';
 import GuardRoute from 'components/GuardRoute';
 import GuestOnlyRoute from 'components/GuestOnlyRoute';
 
 import { listen } from 'app/listener';
 import { getCart } from 'api/cart';
+import Modal from 'elements/Modal/Modal';
 
 function App() {
   useEffect(() => {
@@ -50,7 +50,7 @@ function App() {
             <Invoice />
           </GuardRoute>
           <Route path="/test">
-            <FooterNav />
+            <Modal status="success" type="question" show={false} />
           </Route>
         </Switch>
       </Router>
