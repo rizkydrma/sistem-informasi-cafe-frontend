@@ -1,0 +1,131 @@
+@import '../../assets/scss/colorVariables';
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+  opacity: 0;
+  transition: 0.3s all ease-in-out;
+  pointer-events: none;
+
+  &.enter-done {
+    opacity: 1;
+    pointer-events: visible;
+
+    & .modal-content {
+      transform: translateY(0);
+    }
+  }
+
+  &.exit .modal-content {
+    transform: translateY(-200px);
+  }
+
+  .modal-content {
+    border-radius: 10px;
+    width: 80%;
+    background-color: $secondaryColor;
+    transform: translateY(-200px);
+    transition: 0.5s all ease-in-out;
+
+    @media (min-width: 768px) {
+      width: 500px;
+    }
+
+    .modal-header,
+    .modal-footer {
+      padding: 10px;
+    }
+
+    .modal-header {
+      text-align: center;
+      color: $textColor;
+      font-size: 1.2rem;
+      font-weight: 300;
+      border-bottom: 1px solid rgba($textColor, 0.1);
+    }
+
+    .modal-title {
+      margin: 0;
+    }
+
+    .modal-body {
+      padding: 10px;
+
+      .modal-icon {
+        text-align: center;
+        font-size: 3.5rem;
+
+        &.danger {
+          color: $red;
+        }
+
+        &.success {
+          color: $green;
+        }
+      }
+
+      .image-wrapper {
+        position: relative;
+        width: 100%;
+
+        .img-contain {
+          object-fit: contain;
+          width: 100%;
+          height: 100%;
+        }
+
+        span {
+          position: absolute;
+          width: 100%;
+          text-align: center;
+          bottom: 0;
+        }
+      }
+    }
+
+    .modal-footer {
+      text-align: center;
+      border-top: 1px solid rgba($textColor, 0.1);
+
+      .button {
+        background-color: $secondaryColor;
+        color: $textColor;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.25);
+        transition: 0.5s all ease-in-out;
+
+        &:hover {
+          cursor: pointer;
+          background-color: $secondaryColor;
+          box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.25);
+          transition: 0.3s all ease-in-out;
+        }
+      }
+    }
+  }
+}
+
+.modal.show .modal-content {
+  transform: translateY(0);
+}
+
+.modal select {
+  background-color: lighten($secondaryColor, $amount: 10);
+  color: $textColor;
+  border: none;
+
+  option {
+    padding: 5px 10px;
+    margin: 10px;
+  }
+}

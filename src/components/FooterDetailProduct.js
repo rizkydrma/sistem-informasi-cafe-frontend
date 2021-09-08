@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'elements/Button/Button';
 
 import { sumTax, sumGrandTotal, formatRupiah } from 'utils/utility';
+import Modal from 'elements/Modal/Modal';
 
 export default function FooterDetailProduct({ subTotal }) {
+  const [showModal, setShowModal] = useState(false);
   return (
     <>
       <div className="sub-total">
@@ -22,13 +24,17 @@ export default function FooterDetailProduct({ subTotal }) {
       </div>
       <Button
         isLarge
-        type="link"
-        href="#"
         hasShadow
         className="btn btn-primary d-block"
+        onClick={() => setShowModal(!showModal)}
       >
         Procced To Order
       </Button>
+      <Modal
+        show={showModal}
+        type="question"
+        onClose={() => setShowModal(false)}
+      />
     </>
   );
 }
