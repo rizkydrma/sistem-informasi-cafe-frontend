@@ -8,31 +8,43 @@ import {
 import { useForm } from 'react-hook-form';
 import Button from 'elements/Button/Button';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { getTable } from 'api/table';
 import './Modal.scss';
+import { createOrder } from 'api/order';
+import { clearItems } from 'features/Cart/actions';
 
 export default function Modal(props) {
   const {
+    setValue,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const history = useHistory();
   const [tables, setTables] = useState();
+  let dispatch = useDispatch();
 
   const classes = [props.className];
 
   if (props.show) classes.push('enter-done');
   if (!props.show) classes.shift('enter-done');
 
-  const onClick = () => {
-    if (props.onClick) props.onClick();
-  };
+  // const onClick = () => {
+  //   if (props.onClick) props.onClick();
+  // };
 
-  const onSubmit = ({ notable }) => {
-    localStorage.setItem('notable', notable);
-    history.pushState(props.redirect);
+  const onSubmit = async (payload) => {
+    localStorage.setItem('notable', payload.notable);
+
+    let { data } = await createOrder(payload.notable);
+    console.log(data);
+
+    if (data?.error) return;
+
+    dispatch(clearItems());
+    history.push(props.redirect);
   };
 
   const closeOnEscapeKeyDown = useCallback(
@@ -66,43 +78,45 @@ export default function Modal(props) {
           <div className="modal-header">
             <h4 className="modal-title">Masukan no meja</h4>
           </div>
-          <div className="modal-body">
-            <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="modal-body">
               <div className="form-group">
                 <select
+                  ref={register}
                   name="notable"
-                  ref={register('notable', {
-                    required: true,
-                    maxLength: 3,
-                  })}
                   className={`form-control ${errors.notable ? 'invalid' : ''}`}
                 >
                   {tables &&
                     tables.map((table) => (
-                      <option value={table.notable} key={table._id}>
+                      <option
+                        value={table.notable}
+                        key={table._id}
+                        onClick={() => {
+                          setValue('notable', table.notable);
+                        }}
+                      >
                         {table.notable}
                       </option>
                     ))}
                 </select>
               </div>
-            </form>
-          </div>
-          <div className="modal-footer">
-            <Button
-              onClick={() => onClick()}
-              className="btn btn-primary w-50"
-              isSmall
-            >
-              OK
-            </Button>
-          </div>
+            </div>
+            <div className="modal-footer">
+              <Button className="btn btn-primary w-50" isSmall submit>
+                OK
+              </Button>
+            </div>
+          </form>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="modal enter-done" onClick={() => props.onClose()}>
+    <div
+      className={`modal ${classes.join(' ')}`}
+      onClick={() => props.onClose()}
+    >
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h4 className="modal-title">
@@ -127,7 +141,7 @@ export default function Modal(props) {
         </div>
         <div className="modal-footer">
           <Button
-            onClick={() => onClick()}
+            onClick={() => history.push('/')}
             className="btn btn-primary w-50"
             isSmall
           >

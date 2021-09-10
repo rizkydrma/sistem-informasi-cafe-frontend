@@ -89,9 +89,15 @@ export default function Navbar(props) {
       <h5 className="display-4 title_page">{props.title}</h5>
 
       <div className="notification">
-        <Button className="btn" onClick={() => history.push('/cart')}>
-          <FontAwesomeIcon className="nav-icon" icon={faShoppingCart} />
-        </Button>
+        {location.pathname !== '/cart' ? (
+          <Button className="btn" onClick={() => history.push('/cart')}>
+            <FontAwesomeIcon className="nav-icon" icon={faShoppingCart} />
+          </Button>
+        ) : (
+          <Button className="btn" onClick={() => history.push('/liked')}>
+            <FontAwesomeIcon className="nav-icon" icon={faHeart} />
+          </Button>
+        )}
       </div>
     </nav>
   );

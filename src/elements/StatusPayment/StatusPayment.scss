@@ -1,0 +1,17 @@
+@import '../../assets/scss/colorVariables';
+
+.status-payment {
+  color: $textColor;
+  font-size: 0.75rem;
+  padding: 2px 5px;
+  border-radius: 5px;
+  width: max-content;
+
+  &.waiting {
+    background-color: rgba($red, 0.8);
+  }
+
+  &.done {
+    background-color: rgba($green, 0.8);
+  }
+}

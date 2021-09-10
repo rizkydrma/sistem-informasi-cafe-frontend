@@ -32,6 +32,37 @@ export const sumTax = (value) => {
   return value * (10 / 100);
 };
 
-export const sumGrandTotal = (sumTotal, tax) => {
-  return parseFloat(sumTotal) + parseFloat(tax);
+export const sumGrandTotal = (sumTotal) => {
+  return parseFloat(sumTotal) + parseFloat(sumTotal * 0.1);
+};
+
+export const subTotal = (order_items) => {
+  return order_items
+    .map((item) => item.qty * item.price)
+    .reduce((acc, curr) => acc + curr, 0);
+};
+
+export const formatDate = (date) => {
+  const months = [
+    'JAN',
+    'FEB',
+    'MAR',
+    'APR',
+    'MAY',
+    'JUN',
+    'JUL',
+    'AUG',
+    'SEP',
+    'OCT',
+    'NOV',
+    'DEC',
+  ];
+  let current_datetime = new Date(date);
+  let formatted_date =
+    current_datetime.getDate() +
+    '-' +
+    months[current_datetime.getMonth()] +
+    '-' +
+    current_datetime.getFullYear();
+  return formatted_date;
 };

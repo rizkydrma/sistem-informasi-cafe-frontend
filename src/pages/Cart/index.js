@@ -21,7 +21,7 @@ export default function Cart() {
       <div className="info-order shopping-cart-page">
         <div className="info-order-item">
           <div className="footerbar-detail-product footerbar-detail-product-desk">
-            {carts && <FooterDetailProduct subTotal={subTotal} />}
+            {carts && <FooterDetailProduct subTotal={subTotal} type="cart" />}
 
             {!carts && <SkeletonFooter theme="dark" />}
           </div>
@@ -30,9 +30,15 @@ export default function Cart() {
           {carts && (
             <table className="shopping-cart">
               <tbody>
-                {carts.map((cart) => (
-                  <RowCartProduct cart={cart} key={cart._id} />
-                ))}
+                {carts.length ? (
+                  carts.map((cart) => (
+                    <RowCartProduct cart={cart} key={cart._id} />
+                  ))
+                ) : (
+                  <tr>
+                    <td>Keranjang masih kosong</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           )}
@@ -43,8 +49,8 @@ export default function Cart() {
             ))}
         </div>
       </div>
-      <div className="footerbar footerbar-detail-product ">
-        {carts && <FooterDetailProduct subTotal={subTotal} />}
+      <div className="footerbar footerbar-detail-product">
+        {carts && <FooterDetailProduct subTotal={subTotal} type="cart" />}
         {!carts && <SkeletonFooter theme="dark" />}
       </div>
     </>
