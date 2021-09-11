@@ -3,9 +3,12 @@
 .status-payment {
   color: $textColor;
   font-size: 0.75rem;
-  padding: 2px 5px;
+  padding: 0px 5px;
   border-radius: 5px;
+  height: 1.25rem;
   width: max-content;
+  display: flex;
+  align-items: center;
 
   &.waiting {
     background-color: rgba($red, 0.8);

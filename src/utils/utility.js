@@ -15,6 +15,10 @@ export const compactNumber = (value) => {
   return shortValue + suffixes[suffixNum];
 };
 
+export const numberWithCommas = (x) => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+};
+
 export function formatRupiah(number) {
   if (isNaN(parseInt(number))) return '';
   return new Intl.NumberFormat('id-ID', {

@@ -12,6 +12,7 @@ import FooterDetailProduct from 'components/FooterDetailProduct';
 import { getOneOrder } from 'api/order';
 import { StatusPayment } from 'elements/StatusPayment/StatusPayment';
 import { subTotal } from 'utils/utility';
+import Button from 'elements/Button/Button';
 
 export default function DetailOrder() {
   const titlePage = 'Order Info';
@@ -92,7 +93,12 @@ export default function DetailOrder() {
         {products && (
           <FooterDetailProduct subTotal={subTotal(products.order_items)} />
         )}
-        {StatusPayment(products.status_payment)}
+        <div className="d-flex content-space-between w-100">
+          {StatusPayment(products.status_payment)}
+          <Button isSmall className="btn btn-primary">
+            Invoice
+          </Button>
+        </div>
 
         {!products && (
           <div className="skeleton-wrapper dark d-flex w-100">

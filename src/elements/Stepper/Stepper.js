@@ -52,7 +52,7 @@ export default function Stepper({ order, step }) {
         ))}
       </ul>
       <div className="current-progress">
-        <h3 className="display-3">Preparing</h3>
+        <h3 className="display-3">{order}</h3>
       </div>
     </div>
   );

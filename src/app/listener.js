@@ -3,13 +3,16 @@ import store from './store';
 
 let currentAuth;
 let currentCart;
+let currentLiked;
 
 function listener() {
   let previousAuth = currentAuth;
   let previousCart = currentCart;
+  let previousLiked = currentLiked;
 
   currentAuth = store.getState().auth;
   currentCart = store.getState().cart;
+  currentLiked = store.getState().liked;
 
   let { token } = currentAuth;
 
@@ -21,6 +24,10 @@ function listener() {
     localStorage.setItem('cart', JSON.stringify(currentCart));
 
     saveCart(token, currentCart);
+  }
+
+  if (currentLiked !== previousLiked) {
+    localStorage.setItem('liked', JSON.stringify(currentLiked));
   }
 }
 
