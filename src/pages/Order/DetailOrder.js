@@ -31,6 +31,7 @@ export default function DetailOrder() {
       return;
     }
     setProducts(data);
+    return;
   }, [id]);
 
   useEffect(() => {

@@ -17,6 +17,7 @@ import { listen } from 'app/listener';
 import { getCart } from 'api/cart';
 import ListOrder from 'pages/Order/ListOrder';
 import Table from 'elements/Table/Table';
+import Liked from 'pages/Liked';
 
 function App() {
   useEffect(() => {
@@ -38,8 +39,11 @@ function App() {
           <GuardRoute path="/" exact>
             <Home />
           </GuardRoute>
-          <GuardRoute path="/product">
+          <GuardRoute path="/product/:product_id">
             <DetailProduct />
+          </GuardRoute>
+          <GuardRoute path="/liked">
+            <Liked />
           </GuardRoute>
           <GuardRoute path="/cart">
             <Cart />

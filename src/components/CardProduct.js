@@ -5,11 +5,11 @@ import { faPlus, faStar } from '@fortawesome/free-solid-svg-icons';
 import { config } from 'config';
 import { formatRupiah } from 'utils/utility';
 
-export default function CardProduct({ product, onAddProduct }) {
+export default function CardProduct({ product, onAddProduct, onClick }) {
   return (
     <div className="col-xs-6 col-sm-4 col-md-3">
       <div className="card card_product">
-        <figure className="image-wrapper">
+        <figure className="image-wrapper" onClick={onClick}>
           <img
             src={`${config.api_host}/upload/${product.image_url}`}
             alt="kopi pait"
@@ -21,7 +21,7 @@ export default function CardProduct({ product, onAddProduct }) {
           </div>
         </figure>
         <div className="meta-wrapper">
-          <h5>{product.name}</h5>
+          <h5 onClick={onClick}>{product.name}</h5>
           {product.variant && <span>{product.variant}</span>}
 
           <div className="price">

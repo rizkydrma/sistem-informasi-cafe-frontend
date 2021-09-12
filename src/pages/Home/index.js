@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import Category from 'components/Category';
 
 import SkeletonCard from 'skeletons/SkeletonCard';
@@ -25,7 +26,12 @@ import CardProduct from 'components/CardProduct';
 export default function HomePage() {
   const titlePage = 'Search Product';
   let dispatch = useDispatch();
+  const history = useHistory();
   let products = useSelector((state) => state.products);
+
+  const handleDetailProduct = (param) => {
+    history.push(`/product/${param}`);
+  };
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -60,6 +66,7 @@ export default function HomePage() {
                     product={product}
                     onAddProduct={() => dispatch(addItem(product))}
                     key={product._id}
+                    onClick={() => handleDetailProduct(product._id)}
                   />
                 ))}
 

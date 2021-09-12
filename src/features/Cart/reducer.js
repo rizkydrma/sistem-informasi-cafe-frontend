@@ -4,6 +4,7 @@ import {
   CLEAR_ITEMS,
   REMOVE_ITEM,
   DELETE_ITEM,
+  ADD_ITEM_FROM_DETAIL,
 } from './constants';
 
 const initialState = localStorage.getItem('cart')
@@ -19,7 +20,19 @@ export default function reducer(state = initialState, action) {
           qty: item._id === action.item._id ? item.qty + 1 : item.qty,
         }));
       } else {
-        return [...state, { ...action.item, qty: 1 }];
+        return [
+          ...state,
+          { ...action.item, qty: action.item.qty > 0 ? action.item.qty : 1 },
+        ];
+      }
+
+    case ADD_ITEM_FROM_DETAIL:
+      if (state.find((item) => item._id === action.item._id)) {
+        return state.map((item) =>
+          item._id === action.item._id ? action.item : item,
+        );
+      } else {
+        return [...state, action.item];
       }
 
     case REMOVE_ITEM:

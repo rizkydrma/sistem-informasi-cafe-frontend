@@ -352,9 +352,20 @@ section {
   padding-top: 225px;
   margin-bottom: 75px;
 
+  &.liked-products {
+    padding-top: 75px;
+  }
+
   @media (min-width: 768px) {
     padding-top: 150px;
+    &.liked-products {
+      padding-top: 75px;
+    }
   }
+}
+
+.liked {
+  color: $red;
 }
 
 .slogan {

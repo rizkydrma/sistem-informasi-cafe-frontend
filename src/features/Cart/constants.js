@@ -1,4 +1,5 @@
 export const ADD_ITEM = 'features/Cart/ADD_ITEM';
+export const ADD_ITEM_FROM_DETAIL = 'features/Cart/ADD_ITEM_FROM_DETAIL';
 export const REMOVE_ITEM = 'features/Cart/REMOVE_ITEM';
 export const DELETE_ITEM = 'features/Cart/DELETE_ITEM';
 export const CLEAR_ITEMS = 'features/Cart/CLEAR_ITEMS';

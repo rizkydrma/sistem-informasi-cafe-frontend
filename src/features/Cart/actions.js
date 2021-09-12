@@ -4,11 +4,22 @@ import {
   CLEAR_ITEMS,
   SET_ITEMS,
   DELETE_ITEM,
+  ADD_ITEM_FROM_DETAIL,
 } from './constants';
 
 export function addItem(item) {
   return {
     type: ADD_ITEM,
+    item: {
+      ...item,
+      product: item.product || item,
+    },
+  };
+}
+
+export function addItemFromDetail(item) {
+  return {
+    type: ADD_ITEM_FROM_DETAIL,
     item: {
       ...item,
       product: item.product || item,

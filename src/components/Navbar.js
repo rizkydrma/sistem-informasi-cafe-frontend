@@ -64,7 +64,7 @@ export default function Navbar(props) {
         </Button>
         <Button
           className={`navbar-toggler ${back ? 'visible' : 'not-visible'}`}
-          onClick={() => history.push('/')}
+          onClick={() => history.goBack()}
         >
           <FontAwesomeIcon icon={faChevronLeft} />
         </Button>
