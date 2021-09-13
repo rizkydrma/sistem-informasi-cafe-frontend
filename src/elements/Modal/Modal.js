@@ -39,7 +39,6 @@ export default function Modal(props) {
     localStorage.setItem('notable', payload.notable);
 
     let { data } = await createOrder(payload.notable);
-    console.log(data);
 
     if (data?.error) return;
 

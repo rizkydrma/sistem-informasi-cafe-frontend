@@ -11,7 +11,6 @@ export function likedItem(item) {
 }
 
 export function unlikedItem(item) {
-  console.log(item);
   return {
     type: UNLIKED_ITEM,
     item,

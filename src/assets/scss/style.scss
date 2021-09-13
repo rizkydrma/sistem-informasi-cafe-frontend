@@ -978,3 +978,28 @@ table.order-list {
     letter-spacing: 1px;
   }
 }
+
+.icon-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid rgba($primaryColor, 0.3);
+  padding-bottom: 10px;
+}
+
+.mini-card {
+  display: flex;
+  justify-content: space-between;
+  min-height: 44px;
+  width: 100%;
+  align-items: center;
+  background-color: $secondaryColor;
+  padding: 6px 12px;
+  border-radius: 6px;
+  box-shadow: 2px 4px 6px 0 rgba(0, 0, 0, 0.25);
+
+  &.logout {
+    background-color: $red;
+  }
+}

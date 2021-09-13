@@ -16,7 +16,7 @@ import GuestOnlyRoute from 'components/GuestOnlyRoute';
 import { listen } from 'app/listener';
 import { getCart } from 'api/cart';
 import ListOrder from 'pages/Order/ListOrder';
-import Table from 'elements/Table/Table';
+import Profil from 'pages/Profil';
 import Liked from 'pages/Liked';
 
 function App() {
@@ -35,7 +35,6 @@ function App() {
           <GuestOnlyRoute path="/register">
             <Register />
           </GuestOnlyRoute>
-
           <GuardRoute path="/" exact>
             <Home />
           </GuardRoute>
@@ -57,8 +56,8 @@ function App() {
           <GuardRoute path="/invoice">
             <Invoice />
           </GuardRoute>
-          <Route path="/test">
-            <Table />
+          <Route path="/profil">
+            <Profil />
           </Route>
         </Switch>
       </Router>

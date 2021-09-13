@@ -47,7 +47,6 @@ export default function DetailProductPage() {
     if (qty > 0) {
       setData({ ...data, qty: parseInt(qty) - parseInt(1) });
     }
-    console.log(data);
   };
 
   const fetchProduct = React.useCallback(async () => {
@@ -259,7 +258,6 @@ export default function DetailProductPage() {
                       <div
                         className="add_cart"
                         onClick={() => {
-                          console.log(product);
                           dispatch(addItemFromDetail(data));
                         }}
                       >

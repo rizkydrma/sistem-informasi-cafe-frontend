@@ -37,7 +37,6 @@ export default function Login() {
         type: 'invalidCredential',
         message: data.message,
       });
-      console.log(errors);
 
       setStatus(statusList.error);
     } else {
