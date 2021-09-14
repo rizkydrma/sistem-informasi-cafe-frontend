@@ -912,6 +912,12 @@ table.order-list {
     tr td {
       padding: 8px 0 8px 16px;
     }
+
+    &.custom {
+      tr td {
+        padding: 8px 4px;
+      }
+    }
   }
 
   @media (min-width: 768px) {

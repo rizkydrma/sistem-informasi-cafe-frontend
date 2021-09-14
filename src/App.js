@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from 'app/store';
 
@@ -53,12 +53,13 @@ function App() {
           <GuardRoute path="/list-order">
             <ListOrder />
           </GuardRoute>
-          <GuardRoute path="/invoice">
+
+          <GuardRoute path="/profil">
+            <Profil />
+          </GuardRoute>
+          <GuardRoute path="/invoice/:order_id">
             <Invoice />
           </GuardRoute>
-          <Route path="/profil">
-            <Profil />
-          </Route>
         </Switch>
       </Router>
     </Provider>

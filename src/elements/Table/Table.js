@@ -11,7 +11,7 @@ export default function Table({ items, status }) {
 
   if (status === 'success') {
     return (
-      <table className="table-custom">
+      <table className="order-list order-list-invoice custom">
         <thead>
           <tr>
             <th className="display-5">No</th>

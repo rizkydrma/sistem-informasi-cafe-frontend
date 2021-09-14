@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from 'components/Navbar';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import Stepper from 'elements/Stepper/Stepper';
 import SkeletonDescription from 'skeletons/SkeletonDescription';
@@ -17,6 +17,7 @@ import Button from 'elements/Button/Button';
 export default function DetailOrder() {
   const titlePage = 'Order Info';
   const { id } = useParams();
+  const history = useHistory();
   const [products, setProducts] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
 
@@ -61,10 +62,10 @@ export default function DetailOrder() {
               </div>
             </div>
             <div className="info-order-item">
-              <table className="order-list">
+              <table className="order-list order-list-invoice">
                 <thead>
                   <tr>
-                    <th style={{ width: '40%' }}>
+                    <th>
                       <span className="display-5">Order Item</span>
                     </th>
                     <th>
@@ -80,7 +81,7 @@ export default function DetailOrder() {
                 </thead>
                 <tbody>
                   {products.order_items.map((cart) => (
-                    <RowOrderInfo cart={cart} key={cart._id} />
+                    <RowOrderInfo carts={cart} key={cart._id} />
                   ))}
                 </tbody>
               </table>
@@ -96,7 +97,11 @@ export default function DetailOrder() {
         )}
         <div className="d-flex content-space-between w-100">
           {StatusPayment(products.status_payment)}
-          <Button isSmall className="btn btn-primary">
+          <Button
+            isSmall
+            className="btn btn-primary"
+            onClick={() => history.push(`/invoice/${products._id}`)}
+          >
             Invoice
           </Button>
         </div>
