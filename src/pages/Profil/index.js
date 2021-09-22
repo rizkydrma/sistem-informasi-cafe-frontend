@@ -12,7 +12,7 @@ export default function Profil() {
   const titlePage = 'Profil User';
   const dispatch = useDispatch();
   const history = useHistory();
-  const [orders, setOrders] = React.useState([]);
+  const [orders, setOrders] = React.useState({});
   const [status, setStatus] = React.useState('idle');
   const user = JSON.parse(localStorage.getItem('auth')).user;
 
@@ -30,7 +30,20 @@ export default function Profil() {
       setStatus('error');
       return;
     }
-    setOrders(data);
+
+    if (data.count < 1) {
+      setOrders({
+        data: [
+          {
+            status_payment: 'waiting_payment',
+            order_items: [{ price: 0, qty: 0 }],
+          },
+          { status_payment: 'done', order_items: [{ price: 0, qty: 0 }] },
+        ],
+      });
+    } else {
+      setOrders(data);
+    }
     setStatus('success');
   }, []);
 

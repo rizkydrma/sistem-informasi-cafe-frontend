@@ -98,6 +98,7 @@ export default function ProfilUser({ user, order, onLogout }) {
           </h5>
         </div>
       </div> */}
+
       <div>
         <div className="mini-card mt-10">
           <div className="d-flex flex-column">

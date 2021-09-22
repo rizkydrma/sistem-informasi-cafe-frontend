@@ -7,6 +7,9 @@
 .color-shadow-text {
   color: $shadowColorText;
 }
+.color-red {
+  color: $red;
+}
 
 @each $align in $aligns {
   .text-#{$align} {

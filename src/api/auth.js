@@ -13,19 +13,17 @@ export async function login(email, password) {
 }
 
 export async function logout() {
-  let auth = localStorage.getItem('auth');
-
-  if (!auth) {
-    return JSON.parse({
-      error: 1,
-      message: 'User not found',
+  let { token } = localStorage.getItem('auth')
+    ? JSON.parse(localStorage.getItem('auth'))
+    : {};
+  return await axios
+    .post(`${config.api_host}/auth/logout`, null, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      localStorage.removeItem('auth');
+      return response;
     });
-  }
-
-  localStorage.removeItem('auth');
-
-  return JSON.parse({
-    error: 0,
-    message: 'Logout berhasil',
-  });
 }

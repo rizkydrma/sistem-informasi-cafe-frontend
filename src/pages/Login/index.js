@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userLogin } from 'features/Auth/actions';
 import { rules } from './validation';
@@ -95,6 +95,12 @@ export default function Login() {
               Let's Make Order
             </Button>
           </form>
+          <div className="text-center d-flex flex-column mt-10">
+            <span className="display-5">Belum punya akun?</span>
+            <Link to="/register">
+              <span className="display-5 color-primary">daftar sekarang</span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -43,7 +43,7 @@ export default function Register() {
       fields.forEach((field) => {
         setError(field, {
           type: 'Server',
-          message: data.field[field]?.properties?.message,
+          message: data.fields[field]?.properties?.message,
         });
       });
 
@@ -58,7 +58,7 @@ export default function Register() {
     <div className="login">
       <div className="container_login">
         <BrandLogo color="white" size="large" />
-        <div className="form_login mt-100">
+        <div className="form_login mt-50">
           <h3 className="display-2 mb-10">Welcome !</h3>
           <h5 className="display-5 mb-10">
             Please register your account first <br />
@@ -123,10 +123,10 @@ export default function Register() {
               {status === statusList.process ? 'Sedang memproses' : 'Mendaftar'}
             </Button>
           </form>
-          <div className="text-center mt-2">
-            Sudah punya akun?
+          <div className="text-center d-flex flex-column mt-10">
+            <span className="display-5">Sudah punya akun?</span>
             <Link to="/login">
-              <b>Masuk Sekarang</b>
+              <span className="display-5 color-primary">masuk sekarang</span>
             </Link>
           </div>
         </div>

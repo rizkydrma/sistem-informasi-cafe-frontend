@@ -62,9 +62,9 @@ export default function Modal(props) {
     }
     fetchData();
     document.body.addEventListener('keydown', closeOnEscapeKeyDown);
-    return function cleanup() {
-      document.body.removeEventListener('keydown', closeOnEscapeKeyDown);
-    };
+    // return function cleanup() {
+    //   document.body.removeEventListener('keydown', closeOnEscapeKeyDown);
+    // };
   }, [closeOnEscapeKeyDown, setTables]);
 
   if (props.type === 'question') {
