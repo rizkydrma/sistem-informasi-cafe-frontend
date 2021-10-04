@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -31,10 +31,6 @@ export default function Modal(props) {
   if (props.show) classes.push('enter-done');
   if (!props.show) classes.shift('enter-done');
 
-  // const onClick = () => {
-  //   if (props.onClick) props.onClick();
-  // };
-
   const onSubmit = async (payload) => {
     localStorage.setItem('notable', payload.notable);
 
@@ -46,26 +42,13 @@ export default function Modal(props) {
     history.push(props.redirect);
   };
 
-  const closeOnEscapeKeyDown = useCallback(
-    (e) => {
-      if ((e.charCode || e.keyCode) === 27) {
-        props.onClose();
-      }
-    },
-    [props],
-  );
-
   useEffect(() => {
     async function fetchData() {
       let data = await getTable();
       setTables(data.data);
     }
     fetchData();
-    document.body.addEventListener('keydown', closeOnEscapeKeyDown);
-    // return function cleanup() {
-    //   document.body.removeEventListener('keydown', closeOnEscapeKeyDown);
-    // };
-  }, [closeOnEscapeKeyDown, setTables]);
+  }, [setTables]);
 
   if (props.type === 'question') {
     return (

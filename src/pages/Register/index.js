@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { rules } from './validation';
 import { useForm } from 'react-hook-form';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { registerUser } from 'api/auth';
 import BrandLogo from 'elements/Brand/BrandLogo';
 import Button from 'elements/Button/Button';
+
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const statusList = {
   idle: 'idle',
@@ -21,8 +24,7 @@ export default function Register() {
     setError,
   } = useForm();
   const [status, setStatus] = useState(statusList.idle);
-
-  let history = useHistory();
+  const MySwal = withReactContent(Swal);
 
   const onSubmit = async (formData) => {
     let { password, password_confirmation } = formData;
@@ -48,10 +50,23 @@ export default function Register() {
       });
 
       setStatus(statusList.error);
+    } else {
+      onSuccess();
+      setStatus(statusList.success);
     }
+  };
 
-    setStatus(statusList.success);
-    history.push('register/berhasil');
+  const onSuccess = () => {
+    MySwal.fire({
+      text: 'Register Berhasil!',
+      icon: 'success',
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#7c40ff',
+    });
+    document.getElementById('full_name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
+    document.getElementById('password_confirmation').value = '';
   };
 
   return (

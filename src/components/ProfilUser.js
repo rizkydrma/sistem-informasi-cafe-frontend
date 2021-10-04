@@ -17,46 +17,61 @@ export default function ProfilUser({ user, order, onLogout }) {
   });
 
   const handleSetOrders = React.useCallback(() => {
-    let totalAllOrders = order.data
-      .map((order) => {
-        return order.order_items.reduce(
-          (acc, curr) => acc + curr.price * curr.qty,
-          0,
-        );
-      })
-      .reduce((acc, curr) => acc + curr);
-    let waitingPayment = order.data.filter(
-      (order) => order.status_payment !== 'done',
-    );
-    let totalWaitingPayment = waitingPayment
-      .map((order) => {
-        return order.order_items.reduce(
-          (acc, curr) => acc + curr.price * curr.qty,
-          0,
-        );
-      })
-      .reduce((acc, curr) => acc + curr);
+    if (order.data.length > 0) {
+      let totalAllOrders = order.data
+        .map((order) => {
+          return order.order_items.reduce(
+            (acc, curr) => acc + curr.price * curr.qty,
+            0,
+          );
+        })
+        .reduce((acc, curr) => acc + curr);
+      let waitingPayment = order.data.filter(
+        (order) => order.status_payment !== 'done',
+      );
+      let totalWaitingPayment = waitingPayment
+        .map((order) => {
+          return order.order_items.reduce(
+            (acc, curr) => acc + curr.price * curr.qty,
+            0,
+          );
+        })
+        .reduce((acc, curr) => acc + curr);
+      let donePayment = order.data.filter(
+        (order) => order.status_payment === 'done',
+      );
+      let totalDonePayment = 0;
+      if (donePayment.length < 1) {
+        totalDonePayment = 0;
+      } else {
+        totalDonePayment = donePayment
+          .map((order) => {
+            return order.order_items.reduce(
+              (acc, curr) => acc + curr.price * curr.qty,
+              0,
+            );
+          })
+          .reduce((acc, curr) => acc + curr);
+      }
 
-    let donePayment = order.data.filter(
-      (order) => order.status_payment === 'done',
-    );
-    let totalDonePayment = donePayment
-      .map((order) => {
-        return order.order_items.reduce(
-          (acc, curr) => acc + curr.price * curr.qty,
-          0,
-        );
-      })
-      .reduce((acc, curr) => acc + curr);
-
-    setOrders({
-      allOrders: order.count,
-      totalAllOrders,
-      waitingPayment: waitingPayment.length,
-      totalWaitingPayment,
-      donePayment: donePayment.length,
-      totalDonePayment,
-    });
+      setOrders({
+        allOrders: order.count,
+        totalAllOrders: totalAllOrders + totalAllOrders * 0.1,
+        waitingPayment: waitingPayment.length,
+        totalWaitingPayment: totalWaitingPayment + totalWaitingPayment * 0.1,
+        donePayment: donePayment.length,
+        totalDonePayment: totalDonePayment + totalDonePayment * 0.1,
+      });
+    } else {
+      setOrders({
+        allOrders: order.count,
+        totalAllOrders: 0,
+        waitingPayment: 0,
+        totalWaitingPayment: 0,
+        donePayment: 0,
+        totalDonePayment: 0,
+      });
+    }
   }, [order]);
 
   React.useEffect(() => {
@@ -64,7 +79,7 @@ export default function ProfilUser({ user, order, onLogout }) {
   }, [handleSetOrders]);
 
   return (
-    <section className="mt-100">
+    <section className="profil-user mt-100">
       <div className="icon-user">
         <FontAwesomeIcon icon={faIdCard} className="display-1" />
         <div className="info-user">
@@ -74,31 +89,6 @@ export default function ProfilUser({ user, order, onLogout }) {
           </div>
         </div>
       </div>
-
-      {/* <div className="detail-info-user d-flex content-space-between border-btm">
-        <div>
-          <h5 className="display-6 mb-10 mt-10">Pesanan</h5>
-          <h5 className="display-6 mb-10">Menunggu Pembayaran</h5>
-          <h5 className="display-6 mb-10">Sudah Dibayar</h5>
-        </div>
-        <div>
-          <h5 className="display-6 mb-10 mt-10">{orders.allOrders}</h5>
-          <h5 className="display-6 mb-10">{orders.waitingPayment}</h5>
-          <h5 className="display-6 mb-10">{orders.donePayment}</h5>
-        </div>
-        <div>
-          <h5 className="display-6 mb-10 mt-10">
-            {formatRupiah(orders.totalAllOrders)}
-          </h5>
-          <h5 className="display-6 mb-10">
-            {formatRupiah(orders.totalWaitingPayment)}
-          </h5>
-          <h5 className="display-6 mb-10">
-            {formatRupiah(orders.totalDonePayment)}
-          </h5>
-        </div>
-      </div> */}
-
       <div>
         <div className="mini-card mt-10">
           <div className="d-flex flex-column">

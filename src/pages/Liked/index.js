@@ -37,7 +37,7 @@ export default function Liked() {
                     product={product}
                     onAddProduct={() => dispatch(addItem(product))}
                     key={product._id}
-                    onClick={() => handleDetailProduct(product._id)}
+                    onClick={() => handleDetailProduct(product.product._id)}
                   />
                 ))}
 

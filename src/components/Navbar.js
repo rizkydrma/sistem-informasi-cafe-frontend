@@ -11,6 +11,7 @@ import {
   faUser,
   faBars,
   faChevronLeft,
+  faThList,
 } from '@fortawesome/free-solid-svg-icons';
 
 const navButton = [
@@ -22,32 +23,38 @@ const navButton = [
   },
   {
     id: 2,
-    name: 'Cart',
-    icon: faShoppingCart,
-    href: '/cart',
-  },
-  {
-    id: 3,
     name: 'Liked',
     icon: faHeart,
     href: '/liked',
   },
   {
+    id: 3,
+    name: 'Orders',
+    icon: faThList,
+    href: '/list-order',
+  },
+  {
     id: 4,
     name: 'Profil',
     icon: faUser,
+    href: '/profil',
   },
 ];
 export default function Navbar(props) {
-  const [drawer, setDrawer] = useState(false);
   const [back, setBack] = useState(false);
   const location = useLocation();
   const history = useHistory();
+  const [drawer, setDrawer] = useState(true);
+
   useEffect(() => {
     location.pathname !== '/' ? setBack(true) : setBack(false);
   }, [location]);
 
   const handleDrawer = () => {
+    const footerNav = document.querySelector('nav.footerbar');
+    drawer
+      ? (footerNav.style.transform = 'translateY(65px)')
+      : (footerNav.style.transform = 'translateY(0px)');
     setDrawer(!drawer);
   };
   return (
@@ -70,7 +77,7 @@ export default function Navbar(props) {
         </Button>
       </div>
 
-      <ul className={`navbar-nav ${drawer ? 'collapse' : ''}`}>
+      <ul className="navbar-nav">
         {navButton.map((nav) => (
           <li className="nav-item" key={nav.id}>
             <Button

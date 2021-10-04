@@ -1,4 +1,5 @@
 import { saveCart } from 'api/cart';
+import { saveLiked } from 'api/liked';
 import store from './store';
 
 let currentAuth;
@@ -28,6 +29,7 @@ function listener() {
 
   if (currentLiked !== previousLiked) {
     localStorage.setItem('liked', JSON.stringify(currentLiked));
+    saveLiked(token, currentLiked);
   }
 }
 

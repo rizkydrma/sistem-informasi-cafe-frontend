@@ -56,9 +56,22 @@ export default function DetailOrder() {
                 <h3 className="display-3 mb-20">{products.notable}</h3>
               </div>
               <Stepper order={products.status_order} step={4} />
-              <div className="footerbar-info-order footbar-info-order-desk mt-20">
-                <h3 className="display-5">Grand Total</h3>
-                <h2 className="display-4 color-primary">Rp. 111.1K</h2>
+              <div className="footerbar-detail-product footerbar-info-order footbar-info-order-desk mt-20">
+                {products && (
+                  <FooterDetailProduct
+                    subTotal={subTotal(products.order_items)}
+                  />
+                )}
+                <div className="d-flex content-space-between w-100">
+                  {StatusPayment(products.status_payment)}
+                  <Button
+                    isSmall
+                    className="btn btn-primary"
+                    onClick={() => history.push(`/invoice/${products._id}`)}
+                  >
+                    Invoice
+                  </Button>
+                </div>
               </div>
             </div>
             <div className="info-order-item">

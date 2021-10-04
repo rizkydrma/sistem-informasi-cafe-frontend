@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import Navbar from 'components/Navbar';
 import FooterNav from 'components/FooterNav';
 import ProfilUser from 'components/ProfilUser';
@@ -8,18 +7,40 @@ import { userLogout } from 'features/Auth/actions';
 import { logout } from 'api/auth';
 import { getOrders } from 'api/order';
 
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 export default function Profil() {
   const titlePage = 'Profil User';
   const dispatch = useDispatch();
-  const history = useHistory();
   const [orders, setOrders] = React.useState({});
   const [status, setStatus] = React.useState('idle');
   const user = JSON.parse(localStorage.getItem('auth')).user;
+  const MySwal = withReactContent(Swal);
 
   const handleLogout = () => {
-    logout();
-    dispatch(userLogout());
-    history.push('/');
+    MySwal.fire({
+      title: 'Do you want to logout?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#7c40ff',
+      cancelButtonColor: '#ff5353',
+      confirmButtonText: 'Logout',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const { data } = await logout();
+        if (data.error) {
+          MySwal.fire({
+            text: data.message,
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+        }
+        MySwal.fire('Logout!', data.message, 'success');
+        dispatch(userLogout());
+      }
+    });
   };
 
   const fetchOrders = React.useCallback(async () => {
@@ -30,17 +51,8 @@ export default function Profil() {
       setStatus('error');
       return;
     }
-
     if (data.count < 1) {
-      setOrders({
-        data: [
-          {
-            status_payment: 'waiting_payment',
-            order_items: [{ price: 0, qty: 0 }],
-          },
-          { status_payment: 'done', order_items: [{ price: 0, qty: 0 }] },
-        ],
-      });
+      setOrders({ data: [] });
     } else {
       setOrders(data);
     }

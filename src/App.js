@@ -14,7 +14,6 @@ import GuardRoute from 'components/GuardRoute';
 import GuestOnlyRoute from 'components/GuestOnlyRoute';
 
 import { listen } from 'app/listener';
-import { getCart } from 'api/cart';
 import ListOrder from 'pages/Order/ListOrder';
 import Profil from 'pages/Profil';
 import Liked from 'pages/Liked';
@@ -22,7 +21,6 @@ import Liked from 'pages/Liked';
 function App() {
   useEffect(() => {
     listen();
-    getCart();
   }, []);
 
   return (

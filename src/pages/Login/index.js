@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { userLogin } from 'features/Auth/actions';
 import { rules } from './validation';
+import { getCart } from 'api/cart';
+import { getLiked } from 'api/liked';
 
 import BrandLogo from 'elements/Brand/BrandLogo';
 import Button from 'elements/Button/Button';
 import { login } from 'api/auth';
+
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const statusList = {
   idle: 'idle',
@@ -25,7 +30,7 @@ export default function Login() {
   } = useForm();
   const [status, setStatus] = useState(statusList.idle);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const MySwal = withReactContent(Swal);
 
   const onSubmit = async ({ email, password }) => {
     setStatus(statusList.proccess);
@@ -42,11 +47,28 @@ export default function Login() {
     } else {
       let { user, token } = data;
       dispatch(userLogin(user, token));
-      history.push('/');
+      getCart();
+      getLiked();
+      onSuccess(data.message);
     }
 
     setStatus(statusList.success);
   };
+
+  const onSuccess = (message) => {
+    MySwal.fire({
+      text: message,
+      icon: 'success',
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#7c40ff',
+    });
+  };
+  React.useEffect(() => {
+    setStatus(statusList.idle);
+    return () => {
+      setStatus(statusList.idle);
+    };
+  }, []);
 
   return (
     <div className="login">

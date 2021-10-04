@@ -38,7 +38,9 @@ export default function Table({ items, status }) {
                   </div>
                 ))}
               </td>
-              <td>{subTotal(item.order_items)}</td>
+              <td>
+                {subTotal(item.order_items) + subTotal(item.order_items) * 0.1}
+              </td>
               <td className="text-center">
                 <Button
                   className="btn btn-primary"

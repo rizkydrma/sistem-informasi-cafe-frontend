@@ -33,7 +33,7 @@ export const sumPrice = (items) => {
 };
 
 export const sumTax = (value) => {
-  return value * (10 / 100);
+  return value * 0.1;
 };
 
 export const sumGrandTotal = (sumTotal) => {
@@ -41,9 +41,11 @@ export const sumGrandTotal = (sumTotal) => {
 };
 
 export const subTotal = (order_items) => {
-  return order_items
+  let subTotal = order_items
     .map((item) => item.qty * item.price)
     .reduce((acc, curr) => acc + curr, 0);
+
+  return subTotal;
 };
 
 export const formatDate = (date) => {

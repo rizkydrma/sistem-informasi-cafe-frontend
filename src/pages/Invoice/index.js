@@ -6,12 +6,14 @@ import RowOrderInfo from 'components/RowOrderInfo';
 import Navbar from 'components/Navbar';
 import { getOneOrder } from 'api/order';
 import { formatRupiah, formatDate } from 'utils/utility';
+import QRCode from 'qrcode';
 
 export default function InvoicePage() {
   const titlePage = 'Invoice';
   const [products, setProducts] = React.useState({});
   const [cart, setCart] = React.useState();
   const { order_id } = useParams();
+  const [src, setSrc] = React.useState('');
 
   const fetchOrder = React.useCallback(async (id) => {
     let { data } = await getOneOrder(id);
@@ -30,6 +32,9 @@ export default function InvoicePage() {
     }
     setProducts(data);
     fetchOrder(data.order._id);
+    QRCode.toDataURL(data.order._id).then((data) => {
+      setSrc(data);
+    });
     return;
   }, [order_id, fetchOrder]);
 
@@ -65,15 +70,16 @@ export default function InvoicePage() {
                 </div>
                 <div>
                   <h4 className="display-4 mb-20">Total Amount</h4>
-                  <h3 className="display-3 color-primary mb-20">
+                  <h3 className="display-4 color-primary mb-10">
                     {formatRupiah(products.total)}
                   </h3>
-                  <span className="display-5 d-flex">
+                  <span className="display-5 d-flex mb-10">
                     <div className="circle bg-red"></div>
                     <span className="display-5 color-shadow-text">
                       {formatDate(products.createdAt)}
                     </span>
                   </span>
+                  <img src={src} width={90} alt="qrcode" />
                 </div>
               </div>
             </div>

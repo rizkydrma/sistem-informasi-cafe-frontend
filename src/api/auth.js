@@ -23,7 +23,9 @@ export async function logout() {
       },
     })
     .then((response) => {
-      localStorage.removeItem('auth');
+      localStorage.setItem('cart', []);
+      localStorage.setItem('auth', []);
+      localStorage.setItem('liked', []);
       return response;
     });
 }

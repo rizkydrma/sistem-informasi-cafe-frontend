@@ -240,6 +240,7 @@ main {
   width: 100%;
   border-top: 1px solid rgba($primaryColor, 0.1);
   z-index: 3;
+  transition: 0.3s all ease-in-out;
 
   @media (min-width: 768px) {
     display: none;
@@ -521,6 +522,11 @@ section {
   min-width: 22px;
   min-height: 22px;
   border-radius: 10px;
+
+  &:hover {
+    background-color: lighten($primaryColor, 5);
+    transition: 0.5s all ease-in-out;
+  }
 }
 
 .card {
@@ -1007,5 +1013,22 @@ table.order-list {
 
   &.logout {
     background-color: $red;
+
+    &:hover {
+      background-color: lighten($red, 5);
+      cursor: pointer;
+    }
+  }
+}
+
+.profil-user {
+  padding: 0 32px;
+
+  @media (min-width: 768px) {
+    padding: 0 10rem;
+  }
+
+  @media (min-width: 992px) {
+    padding: 0 20rem;
   }
 }

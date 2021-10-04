@@ -201,3 +201,9 @@
 .border-btm {
   border-bottom: 1px solid rgba($primaryColor, 0.3);
 }
+
+.pointer {
+  &:hover {
+    cursor: pointer;
+  }
+}
