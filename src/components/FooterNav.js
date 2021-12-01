@@ -53,7 +53,7 @@ export default function BottomBar() {
             <Button
               className="btn nav-button"
               type="link"
-              href={nav.href}
+              to={nav.href}
               onClick={(_) => setActive(nav.name)}
             >
               <FontAwesomeIcon icon={nav.icon} className="nav-icon" />

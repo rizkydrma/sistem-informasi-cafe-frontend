@@ -10,6 +10,8 @@ import { getOrders } from 'api/order';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
+import { socket } from 'app/websocket';
+
 export default function Profil() {
   const titlePage = 'Profil User';
   const dispatch = useDispatch();
@@ -29,6 +31,7 @@ export default function Profil() {
       confirmButtonText: 'Logout',
     }).then(async (result) => {
       if (result.isConfirmed) {
+        socket.emit('endCustomer', 1);
         const { data } = await logout();
         if (data.error) {
           MySwal.fire({
@@ -47,6 +50,7 @@ export default function Profil() {
     setStatus('proccess');
 
     let { data } = await getOrders();
+    console.log(data);
     if (data.error) {
       setStatus('error');
       return;

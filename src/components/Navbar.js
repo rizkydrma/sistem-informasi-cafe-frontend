@@ -80,12 +80,7 @@ export default function Navbar(props) {
       <ul className="navbar-nav">
         {navButton.map((nav) => (
           <li className="nav-item" key={nav.id}>
-            <Button
-              className="nav-link"
-              type="link"
-              href="#"
-              onClick={() => history.push(nav.href)}
-            >
+            <Button className="nav-link" type="link" to={nav.href}>
               <FontAwesomeIcon className="nav-icon" icon={nav.icon} />
               {nav.name}
             </Button>
@@ -97,11 +92,11 @@ export default function Navbar(props) {
 
       <div className="notification">
         {location.pathname !== '/cart' ? (
-          <Button className="btn" onClick={() => history.push('/cart')}>
+          <Button className="btn" to="/cart" type="link">
             <FontAwesomeIcon className="nav-icon" icon={faShoppingCart} />
           </Button>
         ) : (
-          <Button className="btn" onClick={() => history.push('/liked')}>
+          <Button className="btn" to="/liked" type="link">
             <FontAwesomeIcon className="nav-icon" icon={faHeart} />
           </Button>
         )}

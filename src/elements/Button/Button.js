@@ -30,10 +30,11 @@ export default function Button(props) {
     } else {
       return (
         <Link
-          to={props.href}
+          to={props.to || '/'}
           className={className.join(' ')}
           style={props.style}
           onClick={onClick}
+          replace
         >
           {props.children}
         </Link>

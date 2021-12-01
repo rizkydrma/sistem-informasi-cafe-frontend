@@ -14,6 +14,8 @@ import { StatusPayment } from 'elements/StatusPayment/StatusPayment';
 import { subTotal } from 'utils/utility';
 import Button from 'elements/Button/Button';
 
+import { socket } from 'app/websocket';
+
 export default function DetailOrder() {
   const titlePage = 'Order Info';
   const { id } = useParams();
@@ -27,17 +29,26 @@ export default function DetailOrder() {
 
   const fetchProduct = React.useCallback(async () => {
     let { data } = await getOneOrder(id);
-
+    console.log(data);
     if (data.error) {
       return;
     }
     setProducts(data);
+
     return;
   }, [id]);
+
+  socket.on(`progressOrder-${products._id}`, (data) => {
+    setProducts(data.order);
+  });
 
   useEffect(() => {
     setUserInfo(getDataUser());
     fetchProduct();
+    return () => {
+      setProducts(false);
+      setUserInfo(null);
+    };
   }, [fetchProduct]);
 
   return (
@@ -93,9 +104,10 @@ export default function DetailOrder() {
                   </tr>
                 </thead>
                 <tbody>
-                  {products.order_items.map((cart) => (
-                    <RowOrderInfo carts={cart} key={cart._id} />
-                  ))}
+                  {products &&
+                    products.order_items.map((cart) => (
+                      <RowOrderInfo carts={cart} key={cart._id} />
+                    ))}
                 </tbody>
               </table>
             </div>

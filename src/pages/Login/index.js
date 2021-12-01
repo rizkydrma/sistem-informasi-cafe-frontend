@@ -14,6 +14,8 @@ import { login } from 'api/auth';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
+import { socket } from 'app/websocket';
+
 const statusList = {
   idle: 'idle',
   proccess: 'proccess',
@@ -61,10 +63,15 @@ export default function Login() {
       icon: 'success',
       confirmButtonText: 'OK',
       confirmButtonColor: '#7c40ff',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        socket.emit('customerActivity', 1);
+      }
     });
   };
   React.useEffect(() => {
     setStatus(statusList.idle);
+
     return () => {
       setStatus(statusList.idle);
     };
