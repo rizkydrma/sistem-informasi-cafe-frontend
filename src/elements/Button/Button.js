@@ -23,6 +23,7 @@ export default function Button(props) {
           style={props.style}
           rel={props.target === '_blank' ? undefined : 'noopener noreferrer'}
           target={props.target === '_blank' ? '_blank' : undefined}
+          disabled={props.disabled}
         >
           {props.children}
         </a>
@@ -34,6 +35,7 @@ export default function Button(props) {
           className={className.join(' ')}
           style={props.style}
           onClick={onClick}
+          disabled={props.disabled}
           replace
         >
           {props.children}
@@ -48,6 +50,7 @@ export default function Button(props) {
       style={props.style}
       onClick={onClick}
       type={`${props.submit ? 'submit' : 'button'}`}
+      disabled={props.disabled}
     >
       {props.children}
     </button>
@@ -61,4 +64,5 @@ Button.propTypes = {
   isSmall: propTypes.bool,
   hasShadow: propTypes.bool,
   submit: propTypes.bool,
+  disabled: propTypes.bool,
 };

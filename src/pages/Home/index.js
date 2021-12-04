@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Category from 'components/Category';
 
@@ -23,19 +23,36 @@ import {
 import { addItem } from 'features/Cart/actions';
 import CardProduct from 'components/CardProduct';
 
+import { socket } from 'app/websocket';
+
 export default function HomePage() {
   const titlePage = 'Search Product';
   let dispatch = useDispatch();
   const history = useHistory();
+  const [update, setUpdate] = useState(false);
   let products = useSelector((state) => state.products);
 
   const handleDetailProduct = (param) => {
     history.push(`/product/${param}`);
   };
 
+  socket.on(`stockProduct`, (data) => {
+    const index = products.data.findIndex((val) => val._id === data._id);
+    products.data[index] = { ...products.data[index], stock: data.stock };
+    setUpdate(!update);
+    console.log(products);
+    console.log(data);
+  });
+
   useEffect(() => {
     dispatch(fetchProducts());
-  }, [dispatch, products.currentPage, products.keyword, products.category]);
+  }, [
+    dispatch,
+    products.currentPage,
+    products.keyword,
+    products.category,
+    update,
+  ]);
 
   return (
     <>

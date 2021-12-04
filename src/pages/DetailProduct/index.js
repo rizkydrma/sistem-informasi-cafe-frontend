@@ -23,10 +23,16 @@ import { addItemFromDetail } from 'features/Cart/actions';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
+import { socket } from 'app/websocket';
+
+const initialState = {
+  _id: '',
+};
+
 export default function DetailProductPage() {
   const titlePage = 'Detail Product';
   const [fullDescription, setFullDescription] = useState(false);
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState(initialState);
   const dispatch = useDispatch();
   const { product_id } = useParams();
   const MySwal = withReactContent(Swal);
@@ -62,6 +68,7 @@ export default function DetailProductPage() {
       qty: 1,
       type: data.type !== undefined ? data.type : null,
     });
+
     return;
   }, [product_id]);
 
@@ -91,7 +98,9 @@ export default function DetailProductPage() {
       }
     });
   };
-
+  socket.on(`stockProduct-${product_id}`, (data) => {
+    setProduct({ ...product, stock: data.stock });
+  });
   useEffect(() => {
     fetchProduct();
     isLiked(likedItems);
@@ -106,12 +115,18 @@ export default function DetailProductPage() {
             <div className="col-xs-12 col-sm-5 offset-sm-1">
               {product && (
                 <div className="image-product">
-                  <figure className="image-wrapper">
-                    <img
-                      src={`${config.api_host}/upload/${product.image_url}`}
-                      alt="kopi signature"
-                      className="img-cover"
-                    />
+                  <figure
+                    className={`image-wrapper pointer ${
+                      product.stock !== 'in stock' ? 'img-out-of-stock' : 'ok'
+                    } `}
+                  >
+                    {product.image_url !== undefined && (
+                      <img
+                        src={`${config.api_host}/upload/${product.image_url}`}
+                        alt="kopi signature"
+                        className="img-cover"
+                      />
+                    )}
                   </figure>
                   <div className="meta-wrapper">
                     <h5>{product.name}</h5>
@@ -243,10 +258,18 @@ export default function DetailProductPage() {
                           )}
                         </div>
                         <div className="col-xs-8">
-                          <div className="add_cart">
+                          <Button
+                            className="add_cart"
+                            onClick={() => {
+                              onSuccess();
+                            }}
+                            disabled={
+                              product.stock !== 'in stock' ? true : undefined
+                            }
+                          >
                             <FontAwesomeIcon icon={faShoppingCart} />
                             Add to Cart
-                          </div>
+                          </Button>
                         </div>
                       </div>
                     </div>
@@ -281,15 +304,18 @@ export default function DetailProductPage() {
                       )}
                     </div>
                     <div className="col-xs-8">
-                      <div
+                      <Button
                         className="add_cart"
                         onClick={() => {
                           onSuccess();
                         }}
+                        disabled={
+                          product.stock !== 'in stock' ? true : undefined
+                        }
                       >
                         <FontAwesomeIcon icon={faShoppingCart} />
                         Add to Cart
-                      </div>
+                      </Button>
                     </div>
                   </div>
                 </div>

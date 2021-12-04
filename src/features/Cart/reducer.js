@@ -28,11 +28,18 @@ export default function reducer(state = initialState, action) {
 
     case ADD_ITEM_FROM_DETAIL:
       if (state.find((item) => item._id === action.item._id)) {
-        return state.map((item) =>
-          item._id === action.item._id ? action.item : item,
-        );
+        return state.map((item) => ({
+          ...item,
+          qty:
+            item._id === action.item._id
+              ? item.qty + action.item.qty
+              : item.qty,
+        }));
       } else {
-        return [...state, action.item];
+        return [
+          ...state,
+          { ...action.item, qty: action.item.qty > 0 ? action.item.qty : 1 },
+        ];
       }
 
     case REMOVE_ITEM:

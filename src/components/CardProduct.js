@@ -23,10 +23,16 @@ export default function CardProduct({ product, onAddProduct, onClick }) {
       }
     });
   };
+
   return (
     <div className="col-xs-6 col-sm-4 col-md-3">
       <div className="card card_product">
-        <figure className="image-wrapper pointer" onClick={() => onClick()}>
+        <figure
+          className={`image-wrapper pointer ${
+            product.stock !== 'in stock' ? 'img-out-of-stock' : ''
+          } `}
+          onClick={() => onClick()}
+        >
           <img
             src={`${config.api_host}/upload/${product.image_url}`}
             alt="kopi pait"
@@ -47,7 +53,11 @@ export default function CardProduct({ product, onAddProduct, onClick }) {
             <h5>
               <span>{formatRupiah(product.price)}</span>
             </h5>
-            <Button className="add_cart" onClick={(_) => onSuccess()}>
+            <Button
+              className="add_cart"
+              onClick={(_) => onSuccess()}
+              disabled={product.stock !== 'in stock' ? true : undefined}
+            >
               <FontAwesomeIcon icon={faPlus} />
             </Button>
           </div>
