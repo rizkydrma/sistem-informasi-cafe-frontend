@@ -40,8 +40,6 @@ export default function HomePage() {
     const index = products.data.findIndex((val) => val._id === data._id);
     products.data[index] = { ...products.data[index], stock: data.stock };
     setUpdate(!update);
-    console.log(products);
-    console.log(data);
   });
 
   useEffect(() => {

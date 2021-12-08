@@ -1,51 +1,56 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faSeedling,
-  faCoffee,
-  faWineGlass,
-  faCookieBite,
-  faUtensils,
-} from '@fortawesome/free-solid-svg-icons';
 import { useEffect } from 'react';
+import { getCategories } from 'api/categories';
 
 export default function Category({ onChange }) {
   const [active, setActive] = useState('All');
-  const categories = [
-    {
-      id: 1,
-      name: 'All',
-      icon: faSeedling,
-      slug: 'all',
-    },
-    {
-      id: 2,
-      name: 'Coffe',
-      slug: 'coffe',
-      icon: faCoffee,
-    },
-    {
-      id: 3,
-      name: 'Drink',
-      slug: 'drink',
-      icon: faWineGlass,
-    },
-    {
-      id: 4,
-      name: 'Snack',
-      slug: 'snack',
-      icon: faCookieBite,
-    },
-    {
-      id: 5,
-      name: 'Main Course',
-      slug: 'main-course',
-      icon: faUtensils,
-    },
-  ];
+  const [categories, setCategories] = useState([]);
+  // const categories = [
+  //   {
+  //     id: 1,
+  //     name: 'All',
+  //     icon: faSeedling,
+  //     slug: 'all',
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Coffe',
+  //     slug: 'coffe',
+  //     icon: faCoffee,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'Drink',
+  //     slug: 'drink',
+  //     icon: faWineGlass,
+  //   },
+  //   {
+  //     id: 4,
+  //     name: 'Snack',
+  //     slug: 'snack',
+  //     icon: faCookieBite,
+  //   },
+  //   {
+  //     id: 5,
+  //     name: 'Main Course',
+  //     slug: 'main-course',
+  //     icon: faUtensils,
+  //   },
+  // ];
+
+  const fetchCategories = async () => {
+    let { data } = await getCategories();
+    if (data.error) {
+      console.log(data.message);
+      return;
+    }
+    let categoriesData = data.data;
+    setCategories([{ _id: 'all', name: 'all' }, ...categoriesData]);
+  };
 
   useEffect(() => {
     setActive('all');
+    fetchCategories();
   }, []);
 
   const handleActiveItem = (category) => {
@@ -57,15 +62,14 @@ export default function Category({ onChange }) {
       {categories.map((category) => (
         <div
           className={`category_item ${
-            active === category.slug ? 'active' : ''
+            active === category.name ? 'active' : ''
           }`}
-          key={category.id}
+          key={category._id}
           onClick={() => {
-            handleActiveItem(category.slug);
-            onChange(category.slug);
+            handleActiveItem(category.name);
+            onChange(category.name);
           }}
         >
-          <FontAwesomeIcon className="category_icon" icon={category.icon} />
           <span className="category_link">{category.name}</span>
           <div className="circle-indicator"></div>
         </div>

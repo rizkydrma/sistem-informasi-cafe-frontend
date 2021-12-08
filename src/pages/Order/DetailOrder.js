@@ -29,7 +29,6 @@ export default function DetailOrder() {
 
   const fetchProduct = React.useCallback(async () => {
     let { data } = await getOneOrder(id);
-    console.log(data);
     if (data.error) {
       return;
     }

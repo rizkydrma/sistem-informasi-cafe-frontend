@@ -50,7 +50,6 @@ export default function Profil() {
     setStatus('proccess');
 
     let { data } = await getOrders();
-    console.log(data);
     if (data.error) {
       setStatus('error');
       return;
