@@ -185,15 +185,17 @@ export default function DetailProductPage() {
                   </div>
                   {product.type && (
                     <div className="type-product">
-                      <h4 className="display-4 mt-10">Type</h4>
+                      <h4 className="display-4 mt-10">Variant</h4>
                       <div className="container">
                         <div className="row">
                           <div className="col-xs-6">
                             <div
                               className={`card card-type ${
-                                data.type === 'Ice' ? 'active' : ''
+                                data.variant === 'Ice' ? 'active' : ''
                               }`}
-                              onClick={() => setData({ ...data, type: 'Ice' })}
+                              onClick={() =>
+                                setData({ ...data, variant: 'Ice' })
+                              }
                             >
                               <span className="display-5">Ice</span>
                             </div>
@@ -201,9 +203,11 @@ export default function DetailProductPage() {
                           <div className="col-xs-6">
                             <div
                               className={`card card-type ${
-                                data.type === 'Hot' ? 'active' : ''
+                                data.variant === 'Hot' ? 'active' : ''
                               }`}
-                              onClick={() => setData({ ...data, type: 'Hot' })}
+                              onClick={() =>
+                                setData({ ...data, variant: 'Hot' })
+                              }
                             >
                               <span className="display-5">Hot</span>
                             </div>
