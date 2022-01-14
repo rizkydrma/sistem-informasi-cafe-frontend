@@ -16,6 +16,7 @@ import GuestOnlyRoute from 'components/GuestOnlyRoute';
 import { listen } from 'app/listener';
 import ListOrder from 'pages/Order/ListOrder';
 import Profil from 'pages/Profil';
+import ChangeProfil from 'pages/Profil/ChangeProfil';
 import Liked from 'pages/Liked';
 
 function App() {
@@ -54,6 +55,9 @@ function App() {
 
           <GuardRoute path="/profil">
             <Profil />
+          </GuardRoute>
+          <GuardRoute path="/changeProfil">
+            <ChangeProfil />
           </GuardRoute>
           <GuardRoute path="/invoice/:order_id">
             <Invoice />

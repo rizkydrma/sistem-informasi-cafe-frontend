@@ -23,6 +23,8 @@ export default function DetailOrder() {
   const [products, setProducts] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
 
+  const user = JSON.parse(localStorage.getItem('auth')).user;
+
   const getDataUser = () => {
     return JSON.parse(localStorage.getItem('auth')).user;
   };
@@ -44,11 +46,21 @@ export default function DetailOrder() {
   useEffect(() => {
     setUserInfo(getDataUser());
     fetchProduct();
+
+    socket.on(`statusPayment-${user._id}`, (data) => {
+      console.log('detail order loop');
+      fetchProduct();
+    });
+
     return () => {
       setProducts(false);
       setUserInfo(null);
+
+      socket.off(`statusPayment-${user._id}`, (data) => {
+        console.log('socket off status payment');
+      });
     };
-  }, [fetchProduct]);
+  }, [fetchProduct, user._id]);
 
   return (
     <>

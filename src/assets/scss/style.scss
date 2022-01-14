@@ -889,7 +889,7 @@ table.order-list {
   margin-top: 10px;
   width: 100%;
   text-align: left;
-  th {
+  margin-bottom: 60px th {
     background-color: $secondaryColor;
     color: $textColor;
     padding: 8px 8px 8px 0;
@@ -1037,6 +1037,15 @@ table.order-list {
       cursor: pointer;
     }
   }
+
+  &.change {
+    background-color: $primaryColor;
+
+    &:hover {
+      background-color: lighten($primaryColor, 5);
+      cursor: pointer;
+    }
+  }
 }
 
 .profil-user {
@@ -1048,5 +1057,18 @@ table.order-list {
 
   @media (min-width: 992px) {
     padding: 0 20rem;
+  }
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .input-field {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding: 3px;
+    font-size: 1.1rem;
   }
 }

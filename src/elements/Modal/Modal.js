@@ -35,7 +35,6 @@ export default function Modal(props) {
     localStorage.setItem('notable', payload.notable);
 
     let { data } = await createOrder(payload.notable);
-    console.log(data);
     if (data?.error) return;
 
     dispatch(clearItems());
@@ -45,7 +44,6 @@ export default function Modal(props) {
   useEffect(() => {
     async function fetchData() {
       let data = await getTable();
-      console.log(data);
       setTables(data.data);
     }
     fetchData();

@@ -54,6 +54,7 @@ export default function Profil() {
       setStatus('error');
       return;
     }
+    console.log(data);
     if (data.count < 1) {
       setOrders({ data: [] });
     } else {

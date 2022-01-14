@@ -5,6 +5,8 @@ import FooterNav from 'components/FooterNav';
 
 import { getOrders } from '../../api/order';
 
+import { socket } from 'app/websocket';
+
 export default function ListOrder() {
   const titlePage = 'List Order';
   let [pesanan, setPesanan] = useState([]);
@@ -16,6 +18,7 @@ export default function ListOrder() {
     setStatus('proccess');
 
     let { data } = await getOrders();
+    console.log(data);
     if (data.error) {
       setStatus('error');
       return;
@@ -28,7 +31,18 @@ export default function ListOrder() {
 
   useEffect(() => {
     fetchPesanan();
-  }, [fetchPesanan]);
+
+    socket.on(`statusPayment-${user._id}`, (data) => {
+      console.log('list order loop');
+      fetchPesanan();
+    });
+
+    return () => {
+      socket.off(`statusPayment-${user._id}`, (data) => {
+        console.log('socket off status Payment');
+      });
+    };
+  }, [fetchPesanan, user._id]);
   return (
     <main>
       <Navbar title={titlePage} />

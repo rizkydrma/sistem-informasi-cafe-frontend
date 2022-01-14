@@ -8,12 +8,21 @@ import { getOneOrder } from 'api/order';
 import { formatRupiah, formatDate } from 'utils/utility';
 import QRCode from 'qrcode';
 
+import { socket } from 'app/websocket';
+
+const statusPayment = {
+  waiting_payment: 'waiting',
+  done: 'done',
+};
+
 export default function InvoicePage() {
   const titlePage = 'Invoice';
   const [products, setProducts] = React.useState({});
   const [cart, setCart] = React.useState();
   const { order_id } = useParams();
   const [src, setSrc] = React.useState('');
+
+  const user = JSON.parse(localStorage.getItem('auth')).user;
 
   const fetchOrder = React.useCallback(async (id) => {
     let { data } = await getOneOrder(id);
@@ -40,7 +49,18 @@ export default function InvoicePage() {
 
   React.useEffect(() => {
     fetchProduct();
-  }, [fetchProduct]);
+    socket.on(`statusPayment-${user._id}`, (data) => {
+      console.log('invoice loop');
+      console.log(data);
+      fetchProduct();
+    });
+
+    return () => {
+      socket.off(`statusPayment-${user._id}`, (data) => {
+        console.log('socket off status payment');
+      });
+    };
+  }, [fetchProduct, user._id]);
   return (
     <>
       <Navbar title={titlePage} />
@@ -57,15 +77,21 @@ export default function InvoicePage() {
             <div className="card card-style-1 mt-40 mb-10">
               <div className="d-flex content-space-between px-10">
                 <div>
-                  <h4 className="display-4 mb-20">Invoice For</h4>
-                  <h4 className="display-4 color-primary mb-10">
+                  <h4 className="display-4 mb-10">Invoice For</h4>
+                  <h4 className="display-3 color-primary mb-20">
                     {products.user.full_name}
                   </h4>
                   <h5 className="display-5 color-shadow-text mb-10">
                     table number
                   </h5>
-                  <h4 className="display-4 color-primary">
+                  <h4 className="display-4 mb-20 color-primary">
                     {products.order.notable}
+                  </h4>
+                  <h5 className="display-5 color-shadow-text mb-10">
+                    Payment Status
+                  </h5>
+                  <h4 className="display-5 mb-20 color-primary">
+                    {statusPayment[products.order.status_payment]}
                   </h4>
                 </div>
                 <div>
