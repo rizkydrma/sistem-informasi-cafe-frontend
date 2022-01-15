@@ -10,6 +10,7 @@ import Cart from 'pages/Cart';
 import DetailOrder from 'pages/Order/DetailOrder';
 import Invoice from 'pages/Invoice';
 import Register from 'pages/Register';
+import DownloadInvoice from 'pages/Invoice/DownloadInvoice';
 import GuardRoute from 'components/GuardRoute';
 import GuestOnlyRoute from 'components/GuestOnlyRoute';
 
@@ -58,6 +59,9 @@ function App() {
           </GuardRoute>
           <GuardRoute path="/changeProfil">
             <ChangeProfil />
+          </GuardRoute>
+          <GuardRoute path="/downloadInvoice">
+            <DownloadInvoice />
           </GuardRoute>
           <GuardRoute path="/invoice/:order_id">
             <Invoice />
