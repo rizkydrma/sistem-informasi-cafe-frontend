@@ -5,8 +5,6 @@ import InvoiceTableRow from './InvoiceTableRow';
 import InvoiceTableBlankSpace from './InvoiceTableBlankSpace';
 import InvoiceTableFooter from './InvoiceTableFooter';
 
-const tableRowsCount = 11;
-
 const styles = StyleSheet.create({
   tableContainer: {
     flexDirection: 'row',
@@ -17,13 +15,23 @@ const styles = StyleSheet.create({
   },
 });
 
-const InvoiceItemsTable = ({ invoice }) => (
-  <View style={styles.tableContainer}>
-    <InvoiceTableHeader />
-    <InvoiceTableRow items={invoice.items} />
-    <InvoiceTableBlankSpace rowsCount={tableRowsCount - invoice.items.length} />
-    <InvoiceTableFooter items={invoice.items} />
-  </View>
-);
+const InvoiceItemsTable = ({ invoice }) => {
+  let tableRowsCount = 15;
+
+  if (invoice.items.length > 15) {
+    tableRowsCount = invoice.items.length;
+  }
+
+  return (
+    <View style={styles.tableContainer}>
+      <InvoiceTableHeader />
+      <InvoiceTableRow items={invoice.items} />
+      <InvoiceTableBlankSpace
+        rowsCount={tableRowsCount - invoice.items.length}
+      />
+      <InvoiceTableFooter items={invoice.items} />
+    </View>
+  );
+};
 
 export default InvoiceItemsTable;

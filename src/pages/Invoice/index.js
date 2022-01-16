@@ -51,11 +51,10 @@ export default function InvoicePage() {
     fetchProduct();
     socket.on(`statusPayment-${user._id}`, (data) => {
       console.log('invoice loop');
-      console.log(data);
       fetchProduct();
     });
 
-    return () => {
+    return function cleanup() {
       socket.off(`statusPayment-${user._id}`, (data) => {
         console.log('socket off status payment');
       });

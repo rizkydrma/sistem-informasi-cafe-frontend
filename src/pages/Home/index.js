@@ -44,6 +44,12 @@ export default function HomePage() {
 
   useEffect(() => {
     dispatch(fetchProducts());
+
+    return function cleanup() {
+      socket.off(`stockProduct`, (data) => {
+        console.log('socket stock product off');
+      });
+    };
   }, [
     dispatch,
     products.currentPage,

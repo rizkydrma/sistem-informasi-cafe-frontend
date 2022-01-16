@@ -72,7 +72,7 @@ export default function Login() {
   React.useEffect(() => {
     setStatus(statusList.idle);
 
-    return () => {
+    return function cleanup() {
       setStatus(statusList.idle);
     };
   }, []);

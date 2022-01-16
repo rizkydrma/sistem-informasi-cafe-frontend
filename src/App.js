@@ -53,7 +53,6 @@ function App() {
           <GuardRoute path="/list-order">
             <ListOrder />
           </GuardRoute>
-
           <GuardRoute path="/profil">
             <Profil />
           </GuardRoute>

@@ -33,7 +33,6 @@ export default function Profil() {
 
   const date = new Date();
 
-  invoice.id = user._id;
   invoice.invoice_no = `${date
     .toLocaleDateString()
     .replaceAll('/', '')}-${user._id.slice(20)}`;
@@ -94,7 +93,7 @@ export default function Profil() {
   React.useEffect(() => {
     fetchOrders();
 
-    return () => {
+    return function cleanup() {
       setStatus('idle');
       setShowDownload(false);
     };

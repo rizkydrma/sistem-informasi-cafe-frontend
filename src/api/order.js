@@ -10,6 +10,7 @@ export async function getOrders(params) {
     headers: {
       authorization: `Bearer ${token}`,
     },
+    params,
   });
 }
 

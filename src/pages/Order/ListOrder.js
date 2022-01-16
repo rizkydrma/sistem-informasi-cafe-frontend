@@ -1,56 +1,64 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Navbar from 'components/Navbar';
 import Table from 'elements/Table/Table';
 import FooterNav from 'components/FooterNav';
-
-import { getOrders } from '../../api/order';
+import Pagination from 'elements/Pagination/Pagination';
+import SkeletonPagination from 'skeletons/SkeletonPagination';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchOrders,
+  goToNextPage,
+  goToPrevPage,
+  setPage,
+} from 'features/Orders/actions';
 
 import { socket } from 'app/websocket';
 
 export default function ListOrder() {
   const titlePage = 'List Order';
-  let [pesanan, setPesanan] = useState([]);
-  let [count, setCount] = useState(0);
-  let [status, setStatus] = useState('idle');
+  let dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('auth')).user;
-
-  const fetchPesanan = useCallback(async () => {
-    setStatus('proccess');
-
-    let { data } = await getOrders();
-    console.log(data);
-    if (data.error) {
-      setStatus('error');
-      return;
-    }
-    setStatus('success');
-    setPesanan(data.data.sort((a, b) => a.order_number - b.order_number));
-
-    setCount(data.count);
-  }, []);
+  let orders = useSelector((state) => state.orders);
 
   useEffect(() => {
-    fetchPesanan();
+    dispatch(fetchOrders());
 
     socket.on(`statusPayment-${user._id}`, (data) => {
       console.log('list order loop');
-      fetchPesanan();
+      dispatch(fetchOrders());
     });
 
-    return () => {
+    return function cleanup() {
       socket.off(`statusPayment-${user._id}`, (data) => {
-        console.log('socket off status Payment');
+        console.log('socket off');
       });
     };
-  }, [fetchPesanan, user._id]);
+  }, [dispatch, orders.currentPage, user._id]);
   return (
     <main>
       <Navbar title={titlePage} />
       <div className="d-flex content-space-between mb-20 mx-20">
-        <h4 className="display-4">Pesanan Anda : {count}</h4>
+        <h4 className="display-4">Pesanan Anda : {orders.totalItems}</h4>
         <h4 className="display-4">{user.full_name}</h4>
       </div>
-      {pesanan && <Table items={pesanan} status={status} />}
+      {orders && <Table items={orders.data} status={orders.status} />}
+      <div
+        className="d-flex content-center"
+        style={{ marginTop: 10, marginBottom: 80 }}
+      >
+        {orders.status === 'success' && (
+          <Pagination
+            totalItems={orders.totalItems}
+            page={orders.currentPage}
+            perPage={orders.perPage}
+            onChange={(page) => dispatch(setPage(page))}
+            onNext={(_) => dispatch(goToNextPage())}
+            onPrev={(_) => dispatch(goToPrevPage())}
+          />
+        )}
+
+        {orders.status === 'process' && <SkeletonPagination theme="dark" />}
+      </div>
       <FooterNav />
     </main>
   );

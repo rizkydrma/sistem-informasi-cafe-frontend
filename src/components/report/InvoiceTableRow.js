@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
 });
 
 const InvoiceTableRow = ({ items }) => {
-  const rows = items.map((item) => (
-    <View style={styles.row} key={item.id}>
+  const rows = items.map((item, idx) => (
+    <View style={styles.row} key={idx}>
       <Text style={styles.description}>{item.name}</Text>
       <Text style={styles.qty}>{item.qty}</Text>
       <Text style={styles.rate}>{item.price}</Text>

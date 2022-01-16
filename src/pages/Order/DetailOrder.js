@@ -52,7 +52,7 @@ export default function DetailOrder() {
       fetchProduct();
     });
 
-    return () => {
+    return function cleanup() {
       setProducts(false);
       setUserInfo(null);
 
