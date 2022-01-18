@@ -12,7 +12,6 @@ import withReactContent from 'sweetalert2-react-content';
 
 import { PDFDownloadLink, StyleSheet } from '@react-pdf/renderer';
 import Invoice from 'components/report/Invoice';
-import invoice from 'assets/data/invoice';
 
 import { socket } from 'app/websocket';
 
@@ -24,21 +23,24 @@ const styles = StyleSheet.create({
 
 export default function Profil() {
   const titlePage = 'Profil User';
+  const user = JSON.parse(localStorage.getItem('auth')).user;
   const dispatch = useDispatch();
   const [orders, setOrders] = React.useState({});
+  const [invoice, setInvoice] = React.useState({
+    id: user._id,
+    invoice_no: `${new Date()
+      .toLocaleDateString()
+      .replaceAll('/', '')}-${user._id.slice(20)}`,
+    balance: '',
+    full_name: user.full_name,
+    email: user.email,
+    trans_date: new Date().toLocaleDateString(),
+    due_date: '',
+    items: [],
+  });
   const [status, setStatus] = React.useState('idle');
   const [showDownload, setShowDownload] = React.useState(false);
-  const user = JSON.parse(localStorage.getItem('auth')).user;
   const MySwal = withReactContent(Swal);
-
-  const date = new Date();
-
-  invoice.invoice_no = `${date
-    .toLocaleDateString()
-    .replaceAll('/', '')}-${user._id.slice(20)}`;
-  invoice.trans_date = date.toLocaleDateString();
-  invoice.full_name = user.full_name;
-  invoice.email = user.email;
 
   const handleLogout = () => {
     MySwal.fire({
@@ -78,14 +80,18 @@ export default function Profil() {
       setOrders({ data: [] });
     } else {
       setOrders(data);
+
+      let items = [];
       data.data.forEach((item, idx) => {
         if (item.status_payment !== 'done') {
           item.order_items.forEach((order, idx) => {
-            invoice.items.push({ id: idx + 1, ...order });
+            items.push({ id: idx + 1, ...order });
           });
           setShowDownload(true);
         }
       });
+
+      setInvoice((prevState) => ({ ...prevState, items }));
     }
     setStatus('success');
   }, []);
@@ -96,6 +102,7 @@ export default function Profil() {
     return function cleanup() {
       setStatus('idle');
       setShowDownload(false);
+      setInvoice([{}]);
     };
   }, [fetchOrders]);
 

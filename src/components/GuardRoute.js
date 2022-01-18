@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faInbox,
-  faProcedures,
+  faPaperPlane,
   faCheckDouble,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -23,7 +23,7 @@ const GuardRoute = ({ children, ...rest }) => {
           break;
         case 'delivery':
           toast.warning(`Pesanan Siap Diantar Order No: ${data.orderNo}`, {
-            icon: <FontAwesomeIcon icon={faProcedures} />,
+            icon: <FontAwesomeIcon icon={faPaperPlane} />,
           });
           break;
         case 'delivered':

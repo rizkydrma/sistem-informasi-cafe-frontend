@@ -10,6 +10,7 @@ import withReactContent from 'sweetalert2-react-content';
 
 export default function CardProduct({ product, onAddProduct, onClick }) {
   const MySwal = withReactContent(Swal);
+  console.log(product);
 
   const onSuccess = () => {
     MySwal.fire({

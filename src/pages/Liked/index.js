@@ -34,7 +34,7 @@ export default function Liked() {
               {products &&
                 products.map((product) => (
                   <CardProduct
-                    product={product}
+                    product={product.product}
                     onAddProduct={() => dispatch(addItem(product))}
                     key={product._id}
                     onClick={() => handleDetailProduct(product.product._id)}
