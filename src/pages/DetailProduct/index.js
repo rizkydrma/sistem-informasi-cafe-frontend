@@ -2,11 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from 'components/Navbar';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faStar,
-  faCoffee,
-  faShoppingCart,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCoffee, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeartFill } from '@fortawesome/free-solid-svg-icons';
 import { getOneProduct } from 'api/products';
@@ -133,8 +129,8 @@ export default function DetailProductPage() {
                     {product.variant && <span>{product.variant}</span>}
                     <div className="bottom-meta">
                       <div className="rating">
-                        <FontAwesomeIcon icon={faStar} />
-                        <span>{product.rating}</span>
+                        <FontAwesomeIcon icon={faHeartFill} />
+                        <span>{product.liked}</span>
                       </div>
                       <div className="category_product">
                         <FontAwesomeIcon icon={faCoffee} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'elements/Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { config } from 'config';
 import { formatRupiah } from 'utils/utility';
 
@@ -10,7 +10,6 @@ import withReactContent from 'sweetalert2-react-content';
 
 export default function CardProduct({ product, onAddProduct, onClick }) {
   const MySwal = withReactContent(Swal);
-  console.log(product);
 
   const onSuccess = () => {
     MySwal.fire({
@@ -40,8 +39,8 @@ export default function CardProduct({ product, onAddProduct, onClick }) {
             className="img-cover"
           />
           <div className="tag">
-            <FontAwesomeIcon icon={faStar} />
-            <span>{product.rating}</span>
+            <FontAwesomeIcon icon={faHeart} />
+            <span>{product.liked}</span>
           </div>
         </figure>
         <div className="meta-wrapper">

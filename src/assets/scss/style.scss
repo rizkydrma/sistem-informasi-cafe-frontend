@@ -615,7 +615,7 @@ section {
     background-color: rgba(0, 0, 0, 0.55);
 
     svg {
-      color: yellow;
+      color: $red;
     }
     span {
       margin: 0 3px;
@@ -713,7 +713,7 @@ section {
   }
 
   .rating svg {
-    color: yellow;
+    color: $red;
   }
 
   .category_product {

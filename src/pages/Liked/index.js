@@ -26,6 +26,7 @@ export default function Liked() {
 
   return (
     <>
+      {console.log(products)}
       <Navbar title={titlePage} />
       <section className="home_page">
         <div className="main_home_page product_list liked-products">
@@ -34,7 +35,7 @@ export default function Liked() {
               {products &&
                 products.map((product) => (
                   <CardProduct
-                    product={product.product}
+                    product={product}
                     onAddProduct={() => dispatch(addItem(product))}
                     key={product._id}
                     onClick={() => handleDetailProduct(product.product._id)}

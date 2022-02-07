@@ -6,6 +6,7 @@ export function likedItem(item) {
     item: {
       ...item,
       product: item.product || item,
+      liked: item.liked + 1,
     },
   };
 }
